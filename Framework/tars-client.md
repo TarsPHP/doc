@@ -21,31 +21,32 @@ tests目录提供了一个tars服务的测试用例。服务名为 **App.Server.
 
 ### 服务寻址方式
 结合测试用例testServant.php介绍不同服务寻址的代码规范。  
-通过 **\Tars\client\CommunicatorConfig** 类设定相关配置。测试用例给出了两种寻址方式的示例代码  
-1、主控寻址  
-一旦指定locator，tars可以根据服务名自动抓取服务地址。locator配置的格式如下  
-```php
-$config = new \Tars\client\CommunicatorConfig();
-$config->setLocator("tars.tarsregistry.QueryObj@tcp -h 172.16.0.161 -p 17890");
-```
-tars主控本身也是一个tars服务，服务名为 **tars.tarsregistry.QueryObj** ，传输协议为tcp，服务地址为 172.16.0.161，端口为 17890 。实际开发中请 **根据服务实际情况填写**  
+通过 **\Tars\client\CommunicatorConfig** 类设定相关配置。测试用例给出了两种寻址方式的示例代码
+  
+1. 主控寻址  
+    一旦指定locator，tars可以根据服务名自动抓取服务地址。locator配置的格式如下  
+    ```php
+    $config = new \Tars\client\CommunicatorConfig();
+    $config->setLocator("tars.tarsregistry.QueryObj@tcp -h 172.16.0.161 -p 17890");
+    ```
+    tars主控本身也是一个tars服务，服务名为 **tars.tarsregistry.QueryObj** ，传输协议为tcp，服务地址为 172.16.0.161，端口为 17890 。实际开发中请 **根据服务实际情况填写**  
+    
+    上述主控服务确定后，可以根据需要指定上报的模块名及编码格式。默认的上报模块名为 **tarsproxy** ，为了便于跟踪业务，建议重新指定上报模块名
+    ```
+    $config->setModuleName("App.Server");
+    $config->setCharsetName("UTF-8");
+    ```
 
-上述主控服务确定后，可以根据需要指定上报的模块名及编码格式。默认的上报模块名为 **tarsproxy** ，为了便于跟踪业务，建议重新指定上报模块名
-```
-$config->setModuleName("App.Server");
-$config->setCharsetName("UTF-8");
-```
-
-2、指定ip
-指定服务方的地址。这种方式需要指定服务的ip、port，代码如下。
-```php
-$route['sIp'] = "127.0.0.1";
-$route['iPort'] = 8080;
-$routeInfo[] = $route;
-$config = new \Tars\client\CommunicatorConfig();
-$config->setRouteInfo($routeInfo);
-```
-其他用法同自动寻址相同
+2. 指定ip
+    指定服务方的地址。这种方式需要指定服务的ip、port，代码如下。
+    ```php
+    $route['sIp'] = "127.0.0.1";
+    $route['iPort'] = 8080;
+    $routeInfo[] = $route;
+    $config = new \Tars\client\CommunicatorConfig();
+    $config->setRouteInfo($routeInfo);
+    ```
+    其他用法同自动寻址相同
 
 ### 网络传输模式
 1. socket同步模式  

@@ -39,30 +39,30 @@ TARS-SERVER是以`SWOOLE`为底层的网络收发实现的,框架主要包含如
    * 指定框架的协议处理方式,是tars还是http
 
 在完成服务的启动之后,会依次进入    
-1. onMasterStart
+* onMasterStart
     - 写入进程的名称  
     - 将pid写入文件中  
     - 进行服务的初始化上报  
-2. onManagerStart
-    * 重命名进程  
-3. onWorkerStart  
-    * 如果是tcp类型,需要先将interface中的注释转化为php的数据,方便路由的时候处理  
-    * 如果是http的类型,需要指定对应的namespacename  
-    * 设置对应的worker的名称  
-    * 如果是timer,需要启动对应的timer  
-    * 在workerId=0的时候(保证只触发一次),将服务的保活上报任务投递到TASK里面  
-4. onTask
-    * 心跳上报
-    * 主调上报
-    * 特性上报  
-5. onReceive/onRequest  
-    - 对于tcp的server,关注`onReceive`:  
+* onManagerStart
+    - 重命名进程  
+* onWorkerStart  
+    - 如果是tcp类型,需要先将interface中的注释转化为php的数据,方便路由的时候处理  
+    - 如果是http的类型,需要指定对应的namespacename  
+    - 设置对应的worker的名称  
+    - 如果是timer,需要启动对应的timer  
+    - 在workerId=0的时候(保证只触发一次),将服务的保活上报任务投递到TASK里面  
+* onTask
+    - 心跳上报
+    - 主调上报
+    - 特性上报  
+- onReceive/onRequest  
+    + 对于tcp的server,关注`onReceive`:  
         * 初始化Request对象,将sw对象,传入超全局变量$_SERVER  
         * 设置protocol为TARSProtocol  
         * 进行协议处理,并回包  
         * 清除全局变量
     
-    - 对于http的server,关注`onRequest`:  
+    + 对于http的server,关注`onRequest`:  
         * 处理cookie、get、post请参数  
         * 初始化Request对象,将sw对象,传入超全局变量$_SERVER  
         * 进行协议处理,并回包  
