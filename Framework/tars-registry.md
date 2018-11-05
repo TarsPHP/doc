@@ -5,7 +5,7 @@ tars平台的tarsregistry服务提供服务发现的功能。
 本模块为php提供主控寻址的能力(服务发现)。
 
 ## 使用说明
-```
+```php
         //从tarsregistry服务寻找服务地址
         $wrapper = new \Tars\registry\QueryFWrapper("tars.tarsregistry.QueryObj@tcp -h 172.16.0.161 -p 17890",1,60000);
         $result = $wrapper->findObjectById("PHPTest.PHPServer.obj");

@@ -5,7 +5,7 @@
 tars-config用来获取从tars管理平台下发的配置。通常使用在下发环境对应的业务配置，例如mysql，redis地址，端口等信息
 
 ## 使用说明
-```
+```php
 <?php
 
 	require_once "../vendor/autoload.php";

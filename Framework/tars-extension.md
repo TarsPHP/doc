@@ -24,7 +24,7 @@ make install
 
 ### 基本类型的映射
 如下是我们对基本类型的映射:
-```
+```php
     bool => \TARS::BOOL
     char => \TARS::CHAR
     uint8 => \TARS::UINT8
@@ -45,12 +45,12 @@ make install
 ### 复杂类型的映射
 针对vector、map、struct三种基本的类型,有一些特殊的打包解包的机制,因此需要引入特别的数据类型:
 vector:
-```
-    vector => \TARS_VECTOR
-    它同时具有两个成员函数pushBack()和push_back()
-    入参为取决于vector本身是包含什么类型的数组
+```php
+    //vector => \TARS_VECTOR
+    //它同时具有两个成员函数pushBack()和push_back()
+    //入参为取决于vector本身是包含什么类型的数组
 
-	例如：
+	//例如：
     $shorts = ["test1","test2"];
     $vector = new \TARS_VECTOR(\TARS::STRING); //定义一个string类型的vector
     foreach ($shorts as $short) {
@@ -58,12 +58,12 @@ vector:
     }
 ```
 map:
-```
-    map => \TARS_MAP
-    它同时具有两个成员函数pushBack()和push_back()
-    入参为取决于map本身包含什么类型
+```php
+    //map => \TARS_MAP
+    //它同时具有两个成员函数pushBack()和push_back()
+    //入参为取决于map本身包含什么类型
 
-    例如：
+    //例如：
     $strings = [["test1"=>1],["test2"=>2]];
     $map = new \TARS_MAP(\TARS::STRING,\TARS::INT64); //定义一个key为string,value是int64的map
     foreach ($strings as $string) {
@@ -72,12 +72,12 @@ map:
 ```
 
 struct:
-```
-    struct => \TARS_Struct
-    struct的构造函数比较特殊,接收classname和classfields两个参数
-    第一个描述名称,第二个描述struct内的变量的信息
+```php
+    //struct => \TARS_Struct
+    //struct的构造函数比较特殊,接收classname和classfields两个参数
+    //第一个描述名称,第二个描述struct内的变量的信息
 
-   例如：
+    //例如：
 	class SimpleStruct extends \TARS_Struct {
 		const ID = 0; //TARS文件中每个struct的tag
 		const COUNT = 1;
@@ -109,7 +109,7 @@ struct:
 作为扩展的核心功能,就是提供tars的编解码和打包解包的能力:
 
 #### 打包解包
-```
+```php
 // 针对基本类型的打包和解包的方法,输出二进制buf
 // iVersion只有1和3两个版本，1版本时$nameOrTagNum需要传入tagNum,方法里面第一个参数为1第二个参数为2以此类推
 // 3版本时$nameOrTagNum需要传入name,参数名
@@ -132,7 +132,7 @@ $value = \TUPAPI::getMap($nameOrTagNum, TARS_Map $clazz, $buf, $isRequire = fals
 $inbuf_arr[$nameOrTagNum] = $buf
 ```
 #### 编码解码
-```
+```php
 //针对tup协议(iVersion=3)的情况：
 //这种情况下客户端发包用encode编码，服务端收包用decode解码，服务端回包用encode编码，客户端收包用decode解码
 // 进行tup协议的编码,返回结果可以用来传输、持久化
@@ -213,4 +213,4 @@ $buf = $ret['sBuffer']
 注意，需要自行下载phpunit的可执行文件，或直接使用预先安装好的phpunit工具，进行单元测试。
 
 #### phpt
-安装完成扩展后，执行make test即可。
+安装完成扩展后，执行`make test`即可。

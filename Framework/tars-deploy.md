@@ -7,7 +7,7 @@ tars-deploy用来打包项目，方便在tars管理平台发布的工具组件�
 1. 依赖
     - Phar扩展
 2. 保证项目下面的./tars/tars.proto.php 文件的存在，并且包含下面内容
-```
+```php
     return array(
         'appName' => 'APPNAME', //app名称 如tars.tarsconfig中的tars
         'serverName' => 'SERVERNAME', //服务名 如tars.tarsconfig中的tarsconfig

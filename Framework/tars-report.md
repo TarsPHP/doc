@@ -6,7 +6,7 @@ tarsphp框架在master进程启动的时候会上报服务存活状态(主进程
 在第一个worker进程启动的时候，会开启一个timer来定时上报存活状态。  
 
 ## 使用说明
-```
+```php
         $serverInfo = new ServerInfo();
         $serverInfo->adapter = 'PHPTest.test.objAdapter';
         $serverInfo->application = 'PHPTest';

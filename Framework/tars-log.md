@@ -32,7 +32,8 @@ $config->init($sFilePath);
 ### 输出日志
 输出日志提供两种方式，一种直接调用`LogServant`的`logger`方式输出远程日志，另一种结合`monolog`输出远程日志(推荐)
 
-- 调用`LogServant`的`logger`方式
+- 调用`LogServant`的`logger`方式  
+
 ```php
 $logServant  = new \Tars\log\LogServant($config);  
 $appName = "App";	//应用名称
@@ -43,7 +44,8 @@ $buffer = ["hahahahaha"];	//日志内容，数组，每个元素为一条日志
 $result = $logServant->logger($appName,$serverName,$file,$format,$buffer);
 ```
 
-- 结合`monolog`方式(推荐)
+- 结合`monolog`方式(推荐)  
+
 ```php
 $logger = new \Monolog\Logger("tars_logger");
 //remote log
