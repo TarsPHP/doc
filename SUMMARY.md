@@ -5,9 +5,9 @@
     * [TARSPHP介绍](Introduction/tarsphp.md)
 
 * [环境搭建]()
-    * [搭建平台环境]()
-    * [搭建php环境]()
-    * [使用docker]()
+    * [搭建平台环境](Environment/platform.md)
+    * [搭建php环境](Environment/php.md)
+    * [使用docker](Environment/docker.md)
 
 * [快速起步]()
     * [搭建HttpServer](QuiteStart/tars-http-server.md)
