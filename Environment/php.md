@@ -23,7 +23,7 @@
 
 
 ##TarsPHP开发相关
-### [快速运行tars-http-server](QuiteStart/tars-http-server.md)
+### [快速运行tars-http-server](../QuiteStart/tars-http-server.md)
 
 ### 开发和打包
     不同语言在开发上存在差异，但基本思路一致：
