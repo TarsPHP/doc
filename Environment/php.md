@@ -1,4 +1,4 @@
-#安装tarsphp依赖环境
+##安装tarsphp依赖环境
     建议安装php7+swoole2
 
 ##安装php
