@@ -2,18 +2,18 @@
     建议安装php7+swoole2
 
 ##安装php
-    项目地址(https://github.com/php/php-src)
+    项目地址 https://github.com/php/php-src 
     
 ##安装swoole
-    项目地址(https://github.com/swoole/swoole-src)
-    编译安装(https://wiki.swoole.com/wiki/page/6.html)
+    项目地址 https://github.com/swoole/swoole-src
+    编译安装 https://wiki.swoole.com/wiki/page/6.html
     PECL一键下载安装
         pecl install swoole
 
 ##安装tarsphp扩展
-    项目地址(https://github.com/TarsPHP/tars-extension)
+    项目地址 https://github.com/TarsPHP/tars-extension
     
-        下载&解压(https://github.com/TarsPHP/tars-extension/archive/master.zip)
+        下载&解压 https://github.com/TarsPHP/tars-extension/archive/master.zip
         cd tars-extension
         sudo phpize 
         sudo ./configure
