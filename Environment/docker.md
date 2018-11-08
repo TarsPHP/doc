@@ -1,7 +1,9 @@
 # 快速安装运行docker-tars
 
+按照如下方法快速安装：
 * 参考tars-docker https://github.com/tangramor/docker-tars
 * 先运行mysql容器，再运行tars容器
+
 ```
     mkdir -p /data/tars/mysql_data
     mkdir -p /data/tars/tars_data
