@@ -9,7 +9,7 @@
 模板相关修改：
     a.新建一个tars.tarsphp.timer服务模板，相比tars.tarsphp.default加一个  isTimer=1 。PHP服务选择tars.tarsphp.timer模板。
     b.或者使用tars.tarsphp.default模板，在编辑服务下面的私有模板里面加入下面内容：
-```
+```xml
 <tars>
  <application>
    <server>
@@ -43,9 +43,9 @@
  
 
  1. 定时任务示例：
-	./src/timer/TenSecondsTimer.php
+  ./src/timer/TenSecondsTimer.php
 
-```
+```php
 <?php
 namespace TimerServer\timer;
 class TenSecondsTimer {
@@ -61,7 +61,7 @@ class TenSecondsTimer {
 ```
 
  2. tars文件夹下面新建tars.proto.php文件, 里面需要包含对你服务本身的说明:
-   ```
+   ```php
    <?php
    return array(
        'appName' => 'PHPTest',
@@ -72,5 +72,5 @@ class TenSecondsTimer {
    这个名称要与在tars平台上面的名称完全一一对应。
 
  3. 注意事项!!!!
-	timer目录下的每个php文件都会和一个worker进程绑定，所以worker的数量一定要不小于定时任务的数量。
-	可以在tars管理平台 Servant管理 里面修改线程数（对于php来说就是swoole的worker数）。
+  timer目录下的每个php文件都会和一个worker进程绑定，所以worker的数量一定要不小于定时任务的数量。
+  可以在tars管理平台 Servant管理 里面修改线程数（对于php来说就是swoole的worker数）。
