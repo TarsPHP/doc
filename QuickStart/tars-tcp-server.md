@@ -1,3 +1,4 @@
+
 # TARS-TCP-SERVER的说明
 
 ## 目录结构说明
@@ -25,36 +26,35 @@
 1. 进入运维管理 => 模板管理
 平台会提供一份新的针对php的模板,命名为tars.tarsphp.default, !!!!!!!必须首先修改其中php的执行路径!!!!!!!
 
-有两种方式保证tcp-server使用正确的模板:
+  有两种方式保证tcp-server使用正确的模板:
 * 自己新建一个tars.tarsphp.tcp模板,里面添加如下内容:
-```xml
-<tars>
- <application>
-...
-    <client>
-...
-   </client>
-   <server>
-     ...
-      package_length_type=N
-      open_length_check=1
-      package_length_offset=0
-      package_body_offset=0
-      package_max_length=2000000
-    </server>
- </application>
-</tars>
-```
-
-只需要在<server>里面添加:
-```
-  package_length_type=N
-  open_length_check=1
-  package_length_offset=0
-  package_body_offset=0
-  package_max_length=2000000
-```
-即可。
+  ```xml
+  <tars>
+   <application>
+  ...
+      <client>
+  ...
+     </client>
+     <server>
+       ...
+        package_length_type=N
+        open_length_check=1
+        package_length_offset=0
+        package_body_offset=0
+        package_max_length=2000000
+      </server>
+   </application>
+  </tars>
+  ```
+  只需要在<server>里面添加:
+  ```
+    package_length_type=N
+    open_length_check=1
+    package_length_offset=0
+    package_body_offset=0
+    package_max_length=2000000
+  ```
+  即可。
 * 第二种方式是在私有模板里面添加这部分内容,但是这种方式并不推荐。
 
 
