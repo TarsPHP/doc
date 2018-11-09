@@ -37,7 +37,7 @@
 * [搭建java server]()
 
 ## 其他
-* [常见问题]()
-* [如何Debug]()
-* [changelog]()
-* [其他外部文档]()
+* [常见问题](Question/index.md)
+* [如何Debug](Question/debug.md)
+* [changelog](Question/changelog.md)
+* [其他外部文档](Question/outsource.md)
