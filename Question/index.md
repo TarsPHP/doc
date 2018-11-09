@@ -51,7 +51,7 @@ tarslog组件可以通过增加ElasticSearchHandler来实现到elk的日志输�
 2表示一个链接发来的数据只会被一个worker处理。这个配置可以按需调整，具体参考[swoole文档](!https://wiki.swoole.com/wiki/page/277.html)
 
 ## 缺少tars扩展
-类似下面这种问题，是由于没有安装tars扩展导致的。安装请参考[文档](!./../Environment/php.md)
+类似下面这种问题，是由于没有安装tars扩展导致的。安装请参考php环境搭建
 >PHP Fatal error:  Class 'TARS_Struct' not found in /usr/local/app/tars/tarsnode/data/PHPTest.PHPServer/bin/src/vendor/phptars/tars-report/src/ServerInfo.php on line 5
 
 >Fatal error: Uncaught Error: Class 'TUPAPI' not found in D:\www\tars-client\tests\vendor\phptars\tars-registry\src\client\TUPAPIWrapperRegistry.php:369
