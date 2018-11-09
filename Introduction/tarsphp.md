@@ -15,7 +15,7 @@ TARSPHP主要实现了如下功能模块:
 * TARS-EXT扩展
 * TARS2PHP工具
 
-另有一些其他模块, 可在[Framework](../Framework/introduce.html)进行查看。
+另有一些其他模块, 可在[Framework](../Framework/introduce.md)进行查看。
 
 从宏观上来讲, 使用TARSPHP你可以做这些事:
 * 启动一个HTTP服务, QPS达到万级
@@ -47,8 +47,8 @@ TARSPHP主要实现了如下功能模块:
 比如现有社区中, 基于TARSPHP, 已有如下扩展的案例:
 * [与Kong结合](https://tangramor.gitlab.io/tars-docker-guide/3.TARS-PHP-HTTP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/)
 * [与PHALCON结合]()
-* [与SWOFT结合](../Advanced/swoft.html)
-* [与Laravel结合](../Advanced/laravel.html)
+* [与SWOFT结合](../Advanced/swoft.md)
+* [与Laravel结合](../Advanced/laravel.md)
 
 后续我们也会尝试接入更多的框架, 从而更好的服务开发者。
 
