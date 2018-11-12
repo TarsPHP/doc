@@ -35,6 +35,7 @@
 * [与Laravel结合使用](Advanced/laravel.md)
 * [java client调用phpserver]()
 * [搭建java server]()
+* [持续集成方案](Advanced/ci.md)
 
 ## 其他
 * [常见问题](Question/index.md)
