@@ -5,6 +5,8 @@ Laravel集成微服务治理框架Tars
 * 支持TarsConfig
 * 支持TarsLog
 * 支持网关注册下线
+* 支持请求开始(laravel.tars.requesting)、请求结束(laravel.tars.requested)事件
+* 支持echo输出内容
 
 # 相关项目
 * LaravelTars (https://github.com/luoxiaojun1992/laravel-tars)
