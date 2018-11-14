@@ -1,3 +1,4 @@
+
 # TARS-TCP-SERVER的说明
 
 ## 目录结构说明
@@ -25,37 +26,36 @@
 1. 进入运维管理 => 模板管理
 平台会提供一份新的针对php的模板,命名为tars.tarsphp.default, !!!!!!!必须首先修改其中php的执行路径!!!!!!!
 
-有两种方式保证tcp-server使用正确的模板:
-* 自己新建一个tars.tarsphp.tcp模板,里面添加如下内容:
-```
-<tars>
- <application>
-...
-    <client>
-...
-   </client>
-   <server>
-     ...
-      package_length_type=N
-      open_length_check=1
-      package_length_offset=0
-      package_body_offset=0
-      package_max_length=2000000
-    </server>
- </application>
-</tars>
-```
-
-只需要在<server>里面添加:
-```
-  package_length_type=N
-  open_length_check=1
-  package_length_offset=0
-  package_body_offset=0
-  package_max_length=2000000
-```
-即可。
-* 第二种方式是在私有模板里面添加这部分内容,但是这种方式并不推荐。
+  有两种方式保证tcp-server使用正确的模板:
+  - 自己新建一个tars.tarsphp.tcp模板,里面添加如下内容:
+  ```xml
+  <tars>
+   <application>
+  ...
+      <client>
+  ...
+     </client>
+     <server>
+       ...
+        package_length_type=N
+        open_length_check=1
+        package_length_offset=0
+        package_body_offset=0
+        package_max_length=2000000
+      </server>
+   </application>
+  </tars>
+  ```
+  只需要在<server>里面添加:
+  ```
+    package_length_type=N
+    open_length_check=1
+    package_length_offset=0
+    package_body_offset=0
+    package_max_length=2000000
+  ```
+  即可。
+  - 第二种方式是在私有模板里面添加这部分内容,但是这种方式并不推荐。
 
 
 2. 在平台上进入运维管理=>部署服务,填写对应的应用名和服务名称,注意,这个与下文中tars文件夹中的tars.proto.php
@@ -91,7 +91,7 @@ php ../src/vendor/phptars/tars2php/src/tars2php.php ./tars.proto.php
 ```
 
 4. 将example.tars放入tars文件夹中,同时在tars文件夹下面新建tars.proto.php文件:
-```
+```php
 <?php
 return array(
     'appName' => 'PHPTest',
@@ -110,7 +110,7 @@ APPName、serverName、objName 需要与tars平台上面申请的完全一致。
 dstPath一般是`../src/?`,这里为`../src/servant`,这样生成的代码就会到这个文件夹。
 namespacePrefix是对应代码的命名空间,这里是`Server\servant`,这个与composer.json中的psr-4的名称也是相互对应的。
 
-5. 执行scripts下面的tars2php.sh, 会在src/servant下面生成一个三级文件夹,
+5. 执行scripts下面的tars2php.sh会在src/servant下面生成一个三级文件夹,
 这里就是PHPTest/PHPServer/obj 
 * classes文件夹 - 存放tars中的struct生成的文件
 * tars文件夹 - 存放tars文件
@@ -122,7 +122,7 @@ namespacePrefix是对应代码的命名空间,这里是`Server\servant`,这个�
 
 
 7. 新建composer.json文件,内容如下:
-```
+```json
 {
     "name" : "tars-tcp-server-demo",
     "description": "tars tcp server",
@@ -147,7 +147,7 @@ namespacePrefix是对应代码的命名空间,这里是`Server\servant`,这个�
 其中name、description、autoload中的psr-4可以修改为自己需要的,我们这里以此为例子。
 
 8. 在src下新建index.php,内容如下:
-```
+```php
 <?php
 require_once(__DIR__."/vendor/autoload.php");
 
@@ -168,7 +168,7 @@ $class->run();
 这个文件负责进行启动和入口加载工作
 
 9. 新建services.php文件,内容如下:
-```
+```php
 <?php
 /**
  * Created by PhpStorm.
