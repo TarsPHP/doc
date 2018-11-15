@@ -179,7 +179,7 @@ $cmd = "/usr/bin/php " . $swoft_bin . $arg_cmd;
 exec($cmd, $output, $r);
 ```
 
-ps：可以查看下面的提交记录
+ps：可以参考下面的提交记录
     https://github.com/dpp2009/swoftInTars/commit/97459b5012f9d7542a2a31d936c65ad8637ee1a0#diff-efc7d6cbd3cc43b894698099b51a99ab
 
 
