@@ -169,16 +169,14 @@ class TarsKeepAliveTask
 
 * 写一个入口文件，来控制swoft框架的启停。
 ```php
-
 // tars 平台然后文件
-//读取tars conf配置
-//处理合成 env文件
+// 读取tars conf配置
+// 处理合成 env文件
 $args = $_SERVER['argv'];
 $swoft_bin = dirname(__FILE__).'/bin/swoft ';
 $arg_cmd = $args[2]=='start' ? 'start -d' : $args[2] ;
 $cmd = "/usr/bin/php " . $swoft_bin . $arg_cmd;
 exec($cmd, $output, $r);
-
 ```
 
 
