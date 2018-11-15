@@ -32,17 +32,11 @@
 
 * 写一个用于调用Tars平台各种接口的class
 ```php
-
 namespace App\Tars;
-
 use \Tars\report\ServerFSync;
 use \Tars\report\ServerFAsync;
 use \Tars\report\ServerInfo;
 use \Tars\Utils;
-
-/**
- *
- */
 class Manage
 {
 
@@ -103,7 +97,7 @@ class Manage
         $adminServerInfo->serverName = $serverName;
         $adminServerInfo->pid = $masterPid;
         $serverF->keepAlive($adminServerInfo);
-
+        
         var_dump(' keepalive ');
     }
 }
