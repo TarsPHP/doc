@@ -30,7 +30,7 @@
 }
 ```
 
-* 写一个用于调用Tars平台各种接口的class
+* 写一个用于调用Tars平台各种接口的class （src/app/Tars/Manage.php）
 ```php
 namespace App\Tars;
 use \Tars\report\ServerFSync;
@@ -104,7 +104,7 @@ class Manage
 ```
 
 
-* 在框架启动成功的时候，上报服务存活，这使用的swoft的框架的事件监听。
+* 在框架启动成功的时候，上报服务存活，这使用的swoft的框架的事件监听。 （src/app/Listener/APPStart.php）
 ```php
 namespace App\Listener;
 use Swoft\Bean\Annotation\Listener;
@@ -134,7 +134,7 @@ class APPStart implements EventHandlerInterface
 }
 ```
 
-* 每隔30s上报一次存活，这里使用swoft框架注解试的定时任务。
+* 每隔30s上报一次存活，这里使用swoft框架注解试的定时任务。 （src/app/Tasks/TarsKeepAliveTask.php）
 ```php
 namespace App\Tasks;
 use App\Lib\DemoInterface;
@@ -167,7 +167,7 @@ class TarsKeepAliveTask
 }
 ```
 
-* 写一个入口文件，来控制swoft框架的启停。
+* 写一个入口文件，来控制swoft框架的启停。 （src/index.php）
 ```php
 // tars 平台然后文件
 // 读取tars conf配置
@@ -179,6 +179,7 @@ $cmd = "/usr/bin/php " . $swoft_bin . $arg_cmd;
 exec($cmd, $output, $r);
 ```
 
-
+ps：可以查看下面的提交记录
+    https://github.com/dpp2009/swoftInTars/commit/97459b5012f9d7542a2a31d936c65ad8637ee1a0#diff-efc7d6cbd3cc43b894698099b51a99ab
 
 
