@@ -97,7 +97,7 @@ Laravel集成微服务治理框架Tars
 
    在tars目录下编写tars接口描述文件，修改配置文件tars/tars.proto.php，新增tarsFiles
 
-   执行编译脚本生成接口代码
+   在scripts目录执行编译脚本生成接口代码
 
    ```shell
    /bin/bash tars2php.sh
