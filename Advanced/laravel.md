@@ -55,7 +55,7 @@ Laravel集成微服务治理框架Tars
    php artisan vendor:publish --tag=tars.tars
    ```
 
-3. 修改配置文件tars/tars.proto.php，替换appName、serverName、objName
+3. 修改配置文件src/config/tars.php文件proto字段，替换appName、serverName、objName
 
 4. 如果使用http协议，且需要自动注册到网关(目前仅支持Kong)，修改配置文件src/config/tars.php
 
@@ -95,7 +95,7 @@ Laravel集成微服务治理框架Tars
 
 7. 如果使用tars协议
 
-   在tars目录下编写tars接口描述文件，修改配置文件tars/tars.proto.php，新增tarsFiles
+   在tars目录下编写tars接口描述文件，修改配置文件src/config/tars文件proto字段，新增tarsFiles
 
    在scripts目录执行编译脚本生成接口代码
 
@@ -105,7 +105,7 @@ Laravel集成微服务治理框架Tars
 
    在src/app/Tars/impl目录下创建接口实现类，编写业务逻辑代码
 
-   修改src/services.php文件，替换接口和接口实现命名空间
+   修改src/config/tars.php文件services字段，替换接口和接口实现命名空间
 
 8. 搭建Tars-PHP开发环境
 
