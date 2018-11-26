@@ -1,5 +1,5 @@
 ##安装tarsphp依赖环境
-    建议安装php7+swoole2
+    建议安装php7+swoole2+
 
 ##安装php
     项目地址 https://github.com/php/php-src 
