@@ -84,6 +84,7 @@
 2. 新建对应的目录结构,固定为scripts、src和tars
 
 3. 在scripts下面新建tars2php.sh文件, 内容为
+
 ```
 cd ../tars/
 

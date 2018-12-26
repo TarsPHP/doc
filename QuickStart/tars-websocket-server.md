@@ -142,7 +142,7 @@ tars.proto.php是进行服务打包和发布的必须文件, 其中的APPName和
 
 4. 在src下新建index.php,内容如下:
 
-```
+```php
 <?php
 require_once(__DIR__."/vendor/autoload.php");
 
@@ -164,7 +164,7 @@ $class->run();
 
 5. 新建services.php文件,内容如下:
 
-```  
+```php  
 <?php  
 // 以namespace的方式,在psr4的框架下对代码进行加载  
 return array(  
@@ -194,7 +194,7 @@ monitorStoreConf为主调上报信息的存储配置
 
 8. tars文件夹下面新建tars.proto.php文件, 里面需要包含对你服务本身的说明:
 
-```
+```php
 <?php
 return array(
     'appName' => 'PHPTest',
@@ -210,7 +210,7 @@ return array(
 
 10. 将隔壁tcp-server的hello.tars放入tars文件夹中,同时在tars文件夹下面新建tarsclient.proto.php文件:
 
-```
+```php
 <?php
 return array(
     'appName' => 'PHPTest',
