@@ -127,11 +127,11 @@ namespacePrefix是对应代码的命名空间,这里是`Server\servant`,这个�
     "name" : "tars-tcp-server-demo",
     "description": "tars tcp server",
     "require": {
-        "phptars/tars-server": "0.1.0",
-        "phptars/tars-deploy": "0.1.0",
-        "phptars/tars-log": "0.1.0",
-        "phptars/tars2php": "0.1.0",
-        "ext-gzip" : ">=0.0.1"
+        "phptars/tars-server": "~0.2",
+        "phptars/tars-deploy": "~0.1",
+        "phptars/tars-log": "~0.1",
+        "phptars/tars2php": "~0.1",
+        "ext-zip" : ">=0.0.1"
     },
     "autoload": {
         "psr-4": {
@@ -143,6 +143,7 @@ namespacePrefix是对应代码的命名空间,这里是`Server\servant`,这个�
         "deploy" : "\\Tars\\deploy\\Deploy::run"
     }
 }
+
 ```
 其中name、description、autoload中的psr-4可以修改为自己需要的,我们这里以此为例子。
 

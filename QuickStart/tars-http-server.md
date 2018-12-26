@@ -47,7 +47,19 @@
   protocolName=http
 ```
 即可。
-- 第二种方式是在私有模板里面添加这部分内容,但是这种方式并不推荐。
+
+* 第二种方式是在私有模板里面添加这部分内容:
+```
+<tars>
+ <application>
+    <client>
+   </client>
+   <server>
+      protocolName=http
+    </server>
+ </application>
+</tars>
+```
 
 
 2. 在平台上进入运维管理=>部署服务,填写对应的应用名和服务名称,注意,这个与下文中tars文件夹中的tars.proto.php
@@ -66,48 +78,52 @@
 1. 新建对应的目录结构,固定为scripts、src和tars
 2. 在src下新建目录,拷贝example中的component和controller两个文件夹
 3. 新建composer.json文件,内容如下:
-   ```json
-   {
-       "name" : "tars-http-server-demo",
-       "description": "tars http server",
-       "require": {
-           "phptars/tars-server": "~0.1.0",
-           "phptars/tars-deploy": "~0.1.0",
-           "phptars/tars2php": "~0.1.0",
-           "phptars/tars-log": "~0.1.0",
-           "ext-zip" : ">=0.0.1"
-       },
-       "autoload": {
-           "psr-4": {
-               "HttpServer\\" : "./"
-           }
-       },
-       "minimum-stability": "stable",
-       "scripts" : {
-           "deploy" : "\\Tars\\deploy\\Deploy::run"
+
+```
+{
+   "name" : "tars-http-server-demo",
+   "description": "tars http server",
+   "require": {
+       "phptars/tars-server": "~0.2",
+       "phptars/tars-deploy": "~0.1",
+       "phptars/tars2php": "~0.1",
+       "phptars/tars-log": "~0.1",
+       "ext-zip" : ">=0.0.1"
+   },
+   "autoload": {
+       "psr-4": {
+           "HttpServer\\" : "./"
+
        }
+   },
+   "minimum-stability": "stable",
+   "scripts" : {
+       "deploy" : "\\Tars\\deploy\\Deploy::run"
    }
-   ```
-   其中name、description、autoload中的psr-4可以修改为自己需要的,我们这里以此为例子。
+}
+```
+其中name、description、autoload中的psr-4可以修改为自己需要的,我们这里以此为例子。
+
 4. 在src下新建index.php,内容如下:
-  ```php
-  <?php
-  require_once(__DIR__."/vendor/autoload.php");
 
-  use \Tars\cmd\Command;
+```php
+<?php
+require_once(__DIR__."/vendor/autoload.php");
 
-  //php tarsCmd.php  conf restart
-  $config_path = $argv[1];
-  $pos = strpos($config_path,"--config=");
+use \Tars\cmd\Command;
 
-  $config_path = substr($config_path,$pos+9);
+//php tarsCmd.php  conf restart
+$config_path = $argv[1];
+$pos = strpos($config_path,"--config=");
 
-  $cmd = strtolower($argv[2]);
+$config_path = substr($config_path,$pos+9);
 
-  $class = new Command($cmd,$config_path);
-  $class->run();
+$cmd = strtolower($argv[2]);
 
-  ```
+$class = new Command($cmd,$config_path);
+$class->run();
+```
+
 这个文件负责进行启动和入口加载工作
 5. 新建services.php文件,内容如下:
  ```php
