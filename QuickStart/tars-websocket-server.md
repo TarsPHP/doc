@@ -68,11 +68,13 @@ tars.proto.php是进行服务打包和发布的必须文件, 其中的APPName和
 ```
 
 只需要在<server>里面添加:
+
 ```
   protocolName=http
 ```
 即可。
 * 第二种方式是在私有模板里面添加这部分内容:
+
 ```
 <tars>
  <application>
@@ -113,6 +115,7 @@ tars.proto.php是进行服务打包和发布的必须文件, 其中的APPName和
 2. 在src下新建目录,拷贝example中的component和controller两个文件夹
 
 3. 新建composer.json文件,内容如下:
+
 ```
 {
    "name" : "tars-http-server-demo",
@@ -138,6 +141,7 @@ tars.proto.php是进行服务打包和发布的必须文件, 其中的APPName和
 其中name、description、autoload中的psr-4可以修改为自己需要的,我们这里以此为例子。
 
 4. 在src下新建index.php,内容如下:
+
 ```
 <?php
 require_once(__DIR__."/vendor/autoload.php");
@@ -159,6 +163,7 @@ $class->run();
 这个文件负责进行启动和入口加载工作
 
 5. 新建services.php文件,内容如下:
+
 ```  
 <?php  
 // 以namespace的方式,在psr4的框架下对代码进行加载  
@@ -188,6 +193,7 @@ monitorStoreConf为主调上报信息的存储配置
 7. 在src下新建conf目录存储配置,默认为ENVConf.php
 
 8. tars文件夹下面新建tars.proto.php文件, 里面需要包含对你服务本身的说明:
+
 ```
 <?php
 return array(
@@ -203,6 +209,7 @@ return array(
 9. 如果你只是试一试,那么首先在可以直接跳到第14步 如果你需要调用tars服务,请继续
 
 10. 将隔壁tcp-server的hello.tars放入tars文件夹中,同时在tars文件夹下面新建tarsclient.proto.php文件:
+
 ```
 <?php
 return array(
@@ -223,6 +230,7 @@ dstPath一般是`../src/?`,这里为`../src/servant`,这样生成的代码就会
 namespacePrefix是对应代码的命名空间,这里是`HttpServer\servant`,这个与composer.json中的psr-4的名称也是相互对应的。
 
 11. 执行scripts下面的tars2php.sh, 会在src/servant下面生成一个三级文件夹,
+
 ```
 cd ../tars/
 

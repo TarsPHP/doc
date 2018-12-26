@@ -91,6 +91,7 @@ php ../src/vendor/phptars/tars2php/src/tars2php.php ./tars.proto.php
 ```
 
 4. 将example.tars放入tars文件夹中,同时在tars文件夹下面新建tars.proto.php文件:
+
 ```php
 <?php
 return array(
@@ -122,6 +123,7 @@ namespacePrefix是对应代码的命名空间,这里是`Server\servant`,这个�
 
 
 7. 新建composer.json文件,内容如下:
+
 ```json
 {
     "name" : "tars-tcp-server-demo",
@@ -148,6 +150,7 @@ namespacePrefix是对应代码的命名空间,这里是`Server\servant`,这个�
 其中name、description、autoload中的psr-4可以修改为自己需要的,我们这里以此为例子。
 
 8. 在src下新建index.php,内容如下:
+
 ```php
 <?php
 require_once(__DIR__."/vendor/autoload.php");
@@ -169,6 +172,7 @@ $class->run();
 这个文件负责进行启动和入口加载工作
 
 9. 新建services.php文件,内容如下:
+
 ```php
 <?php
 /**
@@ -184,6 +188,7 @@ return array(
     'home-class' => '\Server\impl\PHPServerServantImpl'
 );
 ```
+
 home-api指的是interface文件对应的namespace名称和类名
 home-class指的是实现文件对应的namespace名称和类名
 
