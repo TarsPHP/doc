@@ -116,3 +116,95 @@ Laravel集成微服务治理框架Tars
 9. 在Tars-PHP开发环境下打包项目(在src目录下执行```php artisan tars:deploy```)
 
 10. 在Tars管理后台发布项目，请参考[TARS-PHP-TCP服务端与客户端开发](https://tangramor.gitlab.io/tars-docker-guide/2.TARS-PHP-TCP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/))，测试```curl 'http://{ip}:{port}/Laravel/route/{api_route}'```
+
+# 持续集成
+Jenkins Pipeline 配置示例(根据实际情况修改)
+```
+pipeline {
+    agent {
+        node {
+            label 'phpenv'
+        }
+    }
+    parameters { 
+        string(defaultValue: 'upload_from_jenkins', name: 'TAG_DESC', description: '发布版本描述' )
+        string(defaultValue: 'master', name: 'BRANCH_NAME', description: 'git分支，如：develop,master  默认: master')
+    }
+    environment {
+        def JENKINS_HOME = "/root/jenkins"
+        def PROJECT_ROOT = "$JENKINS_HOME/workspace/laravel-tars-demo"
+        def APP_NAME = "PHPTest"
+        def SERVER_NAME = "PHPHTTPServer"
+    }
+    stages {
+        stage('代码拉取与编译'){
+            steps {
+                echo "checkout from git"
+                git credentialsId:'2', url: 'https://gitee.com/lb002/laravel-tars-demo', branch: "${env.BRANCH_NAME}"
+                script {
+                    dir("$PROJECT_ROOT/src") {
+                        echo "Composer Install"
+                        sh "composer install -vvv"
+                    }
+                }
+            }
+        }
+        stage('单元测试') {
+            steps {
+                script {
+                    dir("$PROJECT_ROOT/src") {
+                        echo "phpunit 测试"
+                        sh "vendor/bin/phpunit tests/"
+                        echo "valgrind 测试"
+                    }
+                }
+            }
+        }
+        stage('覆盖率测试') {
+            steps {
+                echo "LCOV 覆盖率测试"
+            }
+        }
+        stage('打包与发布') {
+            steps {
+                script {
+                    dir("$PROJECT_ROOT/src") {
+                        echo "打包"
+                        sh "php artisan tars:deploy"
+                        echo "发布"
+                        sh "ls *.tar.gz > tmp.log"
+                        echo "上传build包"
+                        def packageDeploy = sh(script: "head -n 1 tmp.log", returnStdout: true).trim()
+                        sh "curl -H 'Host:172.18.0.3:3000' -F 'suse=@./${packageDeploy}' -F 'application=${APP_NAME}' -F 'module_name=${SERVER_NAME}' -F 'comment=${env.TAG_DESC}' http://172.18.0.3:3000/pages/server/api/upload_patch_package > curl.log"
+                        echo "发布build包"
+                        def packageVer = sh(script: "jq '.data.id' curl.log", returnStdout: true).trim()
+                        def postJson = '{"serial":true,"items":[{"server_id":30,"command":"patch_tars","parameters":{"patch_id":' + packageVer + ',"bak_flag":false,"update_text":"${env.TAG_DESC}"}}]}'
+                        echo postJson
+                        sh "curl -H 'Host:172.18.0.3:3000' -H 'Content-Type:application/json' -X POST --data '${postJson}' http://172.18.0.3:3000/pages/server/api/add_task"
+                    }
+                }
+            }
+        }
+    }
+    post {
+        success {
+            emailext (
+                subject: "[jenkins]构建通知：${env.JOB_NAME} 分支: ${env.BRANCH_NAME} - Build# ${env.BUILD_NUMBER} 成功  !",
+                body: '${SCRIPT, template="groovy-html.template"}',
+                mimeType: 'text/html',
+                to: "luoxiaojun1992@sina.cn",
+            )
+            cleanWs()
+        }
+        failure {
+            emailext (
+                subject: "[jenkins]构建通知：${env.JOB_NAME} 分支: ${env.BRANCH_NAME} - Build# ${env.BUILD_NUMBER} 失败 !",
+                body: '${SCRIPT, template="groovy-html.template"}',
+                mimeType: 'text/html',
+                to: "luoxiaojun1992@sina.cn",
+            )
+            cleanWs()
+        }
+    }
+}
+```
