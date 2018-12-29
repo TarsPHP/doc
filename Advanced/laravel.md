@@ -86,7 +86,7 @@ Laravel集成微服务治理框架Tars
 6. 如果使用http协议，且需要使用分布式追踪(zipkin)，修改配置文件src/config/tars.php
 
    ```php
-   'zipkin_url' => 'http://127.0.0.1:9411/api/v2/spans'
+   'zipkin_url' => 'http://127.0.0.1:9411/api/v2/spans' //根据实际情况填写
    ```
 
    Trace ID可以通过header声明(x-trace-id)，如果为空默认随机生成，同一个Trace ID可以实现调用链追踪
