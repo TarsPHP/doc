@@ -8,6 +8,7 @@ Laravel集成微服务治理框架Tars
 * 支持请求开始(laravel.tars.requesting)、请求结束(laravel.tars.requested)事件
 * 支持echo输出内容
 * 支持http和tars协议
+* 支持zipkin分布式追踪
 
 # 相关项目
 * LaravelTars (https://github.com/luoxiaojun1992/laravel-tars)
@@ -81,8 +82,16 @@ Laravel集成微服务治理框架Tars
    ```php
    'log_level' => \Monolog\Logger::INFO
    ```
-   
-6. 如果使用http协议，按框架原生方式编写代码，路由前缀必须为/Laravel/route
+
+6. 如果使用http协议，且需要使用分布式追踪(zipkin)，修改配置文件src/config/tars.php
+
+   ```php
+   'zipkin_url' => 'http://127.0.0.1:9411/api/v2/spans'
+   ```
+
+   Trace ID可以通过header声明(x-trace-id)，如果为空默认随机生成，同一个Trace ID可以实现调用链追踪
+
+7. 如果使用http协议，按框架原生方式编写代码，路由前缀必须为/Laravel/route
 
    ```php
    $router->group(['prefix' => '/Laravel/route'], function () use ($router) {
@@ -93,7 +102,7 @@ Laravel集成微服务治理框架Tars
    });
    ```
 
-7. 如果使用tars协议
+8. 如果使用tars协议
 
    在tars目录下编写tars接口描述文件，修改配置文件src/config/tars文件proto字段，新增tarsFiles
 
@@ -107,15 +116,15 @@ Laravel集成微服务治理框架Tars
 
    修改src/config/tars.php文件services字段，替换接口和接口实现命名空间
 
-8. 搭建Tars-PHP开发环境
+9. 搭建Tars-PHP开发环境
 
    如果使用http协议，请参考[TARS-PHP-HTTP服务端与客户端开发](https://tangramor.gitlab.io/tars-docker-guide/3.TARS-PHP-HTTP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/)
 
    如果使用tars协议，请参考[TARS-PHP-TCP服务端与客户端开发](https://tangramor.gitlab.io/tars-docker-guide/2.TARS-PHP-TCP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/)
 
-9. 在Tars-PHP开发环境下打包项目(在src目录下执行```php artisan tars:deploy```)
+10. 在Tars-PHP开发环境下打包项目(在src目录下执行```php artisan tars:deploy```)
 
-10. 在Tars管理后台发布项目，请参考[TARS-PHP-TCP服务端与客户端开发](https://tangramor.gitlab.io/tars-docker-guide/2.TARS-PHP-TCP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/))，测试```curl 'http://{ip}:{port}/Laravel/route/{api_route}'```
+11. 在Tars管理后台发布项目，请参考[TARS-PHP-TCP服务端与客户端开发](https://tangramor.gitlab.io/tars-docker-guide/2.TARS-PHP-TCP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/))，测试```curl 'http://{ip}:{port}/Laravel/route/{api_route}'```
 
 # 持续集成
 Jenkins Pipeline 配置示例(根据实际情况修改)
