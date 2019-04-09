@@ -31,6 +31,7 @@
 
 ## 高阶应用
 * [PHP的Swoole框架如何接入Tars](Advanced/swoole-suport-tars.md)
+* [与thinkphp结合使用](Advanced/thinkphp.md)
 * [与Plalcon结合使用]()
 * [与Swoft结合使用](Advanced/swoft.md)
 * [与Laravel结合使用](Advanced/laravel.md)
