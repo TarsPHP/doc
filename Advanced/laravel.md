@@ -8,7 +8,7 @@ Laravel集成微服务治理框架Tars
 * 支持请求开始(laravel.tars.requesting)、请求结束(laravel.tars.requested)事件
 * 支持echo输出内容
 * 支持http和tars协议
-* 支持zipkin分布式追踪
+* 支持zipkin分布式追踪(已移除，可以使用[laravel-zipkin扩展包](https://github.com/luoxiaojun1992/laravel-zipkin))
 
 # 相关项目
 * LaravelTars (https://github.com/luoxiaojun1992/laravel-tars)
@@ -83,18 +83,7 @@ Laravel集成微服务治理框架Tars
    'log_level' => \Monolog\Logger::INFO
    ```
 
-6. 如果使用http协议，且需要使用分布式追踪(zipkin)，修改配置文件src/config/tars.php
-
-   ```php
-   'trace' => [
-      'zipkin_url' => 'http://127.0.0.1:9411/api/v2/spans', //根据实际情况填写
-      'sample_rate' => 0, //采样频率，百分比小数，根据实际情况替换
-   ],
-   ```
-
-   Trace ID可以通过header声明(x-trace-id)，如果为空默认随机生成，同一个Trace ID可以实现调用链追踪
-
-7. 如果使用http协议，按框架原生方式编写代码，路由前缀必须为/Laravel/route
+6. 如果使用http协议，按框架原生方式编写代码，路由前缀必须为/Laravel/route
 
    ```php
    $router->group(['prefix' => '/Laravel/route'], function () use ($router) {
@@ -105,7 +94,7 @@ Laravel集成微服务治理框架Tars
    });
    ```
 
-8. 如果使用tars协议
+7. 如果使用tars协议
 
    在tars目录下编写tars接口描述文件，修改配置文件src/config/tars文件proto字段，新增tarsFiles
 
@@ -119,15 +108,15 @@ Laravel集成微服务治理框架Tars
 
    修改src/config/tars.php文件services字段，替换接口和接口实现命名空间
 
-9. 搭建Tars-PHP开发环境
+8. 搭建Tars-PHP开发环境
 
    如果使用http协议，请参考[TARS-PHP-HTTP服务端与客户端开发](https://tangramor.gitlab.io/tars-docker-guide/3.TARS-PHP-HTTP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/)
 
    如果使用tars协议，请参考[TARS-PHP-TCP服务端与客户端开发](https://tangramor.gitlab.io/tars-docker-guide/2.TARS-PHP-TCP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/)
 
-10. 在Tars-PHP开发环境下打包项目(在src目录下执行```php artisan tars:deploy```)
+9. 在Tars-PHP开发环境下打包项目(在src目录下执行```php artisan tars:deploy```)
 
-11. 在Tars管理后台发布项目，请参考[TARS-PHP-TCP服务端与客户端开发](https://tangramor.gitlab.io/tars-docker-guide/2.TARS-PHP-TCP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/))，测试```curl 'http://{ip}:{port}/Laravel/route/{api_route}'```
+10. 在Tars管理后台发布项目，请参考[TARS-PHP-TCP服务端与客户端开发](https://tangramor.gitlab.io/tars-docker-guide/2.TARS-PHP-TCP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/))，测试```curl 'http://{ip}:{port}/Laravel/route/{api_route}'```
 
 # 持续集成
 Jenkins Pipeline 配置示例(根据实际情况修改)
@@ -182,17 +171,19 @@ pipeline {
                 script {
                     dir("$PROJECT_ROOT/src") {
                         echo "打包"
+                        sh "cp .env.example .env"
+                        sh "echo \"\\r\\n#Tars\\r\\nTARS_REGISTRY=\\\"tars.tarsregistry.QueryObj@tcp -h 172.18.0.6 -p 17890\\\"\\r\\n\" >> .env"
                         sh "php artisan tars:deploy"
                         echo "发布"
                         sh "ls *.tar.gz > tmp.log"
                         echo "上传build包"
                         def packageDeploy = sh(script: "head -n 1 tmp.log", returnStdout: true).trim()
-                        sh "curl -H 'Host:172.18.0.3:3000' -F 'suse=@./${packageDeploy}' -F 'application=${APP_NAME}' -F 'module_name=${SERVER_NAME}' -F 'comment=${env.TAG_DESC}' http://172.18.0.3:3000/pages/server/api/upload_patch_package > curl.log"
+                        sh "curl -H 'Host:172.18.0.6:3000' -F 'suse=@./${packageDeploy}' -F 'application=${APP_NAME}' -F 'module_name=${SERVER_NAME}' -F 'comment=${env.TAG_DESC}' http://172.18.0.6:3000/pages/server/api/upload_patch_package > curl.log"
                         echo "发布build包"
                         def packageVer = sh(script: "jq '.data.id' curl.log", returnStdout: true).trim()
                         def postJson = '{"serial":true,"items":[{"server_id":30,"command":"patch_tars","parameters":{"patch_id":' + packageVer + ',"bak_flag":false,"update_text":"${env.TAG_DESC}"}}]}'
                         echo postJson
-                        sh "curl -H 'Host:172.18.0.3:3000' -H 'Content-Type:application/json' -X POST --data '${postJson}' http://172.18.0.3:3000/pages/server/api/add_task"
+                        sh "curl -H 'Host:172.18.0.6:3000' -H 'Content-Type:application/json' -X POST --data '${postJson}' http://172.18.0.6:3000/pages/server/api/add_task"
                     }
                 }
             }
