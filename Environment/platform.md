@@ -228,13 +228,14 @@ mkdir -p /data/log/tars
 ![alt_text](https://github.com/TarsCloud/Tars/raw/master/docs/images/tars_tarsstat_bushu.png)
 
 点击服务管理 => 选中一个服务 => 发布管理，上传发布包，即6.2中生成的基础发布包，点击发布即可。
+
 ![alt_text](https://github.com/TarsCloud/Tars/raw/master/docs/images/tars_tarsnotify_patch.png)
 
 按照此方式逐个部署tarsnotify、tarsproperty、tarslog、tarsquerystat、tarsqueryproperty。
 
-注意在服务部署页面选择服务相应的模板，如tarsstat模板为tars.tarsstat, tarsproperty模板为tars.tarsproperty。
+**注意在服务部署页面选择服务相应的模板，如tarsstat模板为tars.tarsstat, tarsproperty模板为tars.tarsproperty。**
 
-注意tarsquerystat、tarsqueryproperty的协议选择非TARS，其他选择为TARS。
+**注意tarsquerystat、tarsqueryproperty的协议选择非TARS，其他选择为TARS。**
 
 
 ## 附录
