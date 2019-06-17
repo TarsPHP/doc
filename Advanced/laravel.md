@@ -1,7 +1,7 @@
 # 简介
 Laravel集成微服务治理框架Tars
 * 支持服务打包
-* 支持Lumen原生开发
+* 支持Laravel/Lumen原生开发
 * 支持TarsConfig
 * 支持TarsLog
 * 支持网关注册下线
@@ -13,6 +13,8 @@ Laravel集成微服务治理框架Tars
 # 相关项目
 * LaravelTars (https://github.com/luoxiaojun1992/laravel-tars)
 * LaravelTarsDemo (https://github.com/luoxiaojun1992/laravel-tars-demo)
+* LumenTarsDemo (https://github.com/luoxiaojun1992/lumen-tars-demo)
+* Laravel5.x (https://github.com/laravel/framework)
 * Lumen5.x (https://github.com/laravel/lumen)
 * TARSPHP (https://github.com/TarsPHP)
 * TARSPHP DOCKER (https://github.com/tangramor/docker-tars)
@@ -20,7 +22,7 @@ Laravel集成微服务治理框架Tars
 # 使用
 1. 创建项目
 
-   创建Tars项目目录结构(scripts、src、tars)，Lumen项目放在src目录下
+   创建Tars项目目录结构(scripts、src、tars)，Laravel/Lumen项目放在src目录下
 
 2. 安装Laravel Tars包
 
