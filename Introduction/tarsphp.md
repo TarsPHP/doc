@@ -49,6 +49,7 @@ TARSPHP主要实现了如下功能模块:
 * [与PHALCON结合]()
 * [与SWOFT结合](../Advanced/swoft.md)
 * [与Laravel结合](../Advanced/laravel.md)
+* [与Yii2结合](../Advanced/yii2.md)
 
 后续我们也会尝试接入更多的框架, 从而更好的服务开发者。
 
