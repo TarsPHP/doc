@@ -71,12 +71,8 @@ Laravel集成微服务治理框架Tars
    ]
    ```
 
-5. 如果需要使用配置中心(TarsConfig)或者日志服务(TarsLog)，修改配置文件src/config/tars.php
+5. 配置中心(TarsConfig)或者日志服务(TarsLog)
 
-   ```php
-   'tarsregistry' => 'tars.tarsregistry.QueryObj@tcp -h 172.17.0.3 -p 17890' //根据实际情况填写，TarsConfig配置文件名称固定为'tars'
-   ```
-   
    服务启动时会自动拉取配置，如果需要记录日志，可以使用类似```Log::info('test log');```
    
    如果需要指定TarsLog记录的最低日志级别，修改配置文件src/config/tars.php
@@ -174,7 +170,6 @@ pipeline {
                     dir("$PROJECT_ROOT/src") {
                         echo "打包"
                         sh "cp .env.example .env"
-                        sh "echo \"\\r\\n#Tars\\r\\nTARS_REGISTRY=\\\"tars.tarsregistry.QueryObj@tcp -h 172.18.0.6 -p 17890\\\"\\r\\n\" >> .env"
                         sh "php artisan tars:deploy"
                         echo "发布"
                         sh "ls *.tar.gz > tmp.log"
