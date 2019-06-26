@@ -69,7 +69,7 @@ Yii2集成微服务治理框架Tars
    如果需要指定TarsLog记录的最低日志级别，修改配置文件src/config/params.php文件tars字段
    
    ```php
-   'log_level' => \Monolog\Logger::INFO
+   'log_level' => ['info']
    ```
 
    如果需要指定TarsLog的记录频率，修改配置文件src/config/params.php文件tars字段
