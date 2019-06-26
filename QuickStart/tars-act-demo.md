@@ -53,6 +53,17 @@ user_info.sql是QD.UserServer服务的用户信息表
 
 12.刷新一下，你发的弹幕出来了吗？恭喜你 O(∩_∩)O哈哈~
 
+
+# 多servant支持
+1. tars-server 0.3 以上版本支持多servant，可以实现tars 和 http 协议混合部署
+2. QD.UserService服务已经实现了tars和http协议混合部署的范例，按照上面的说明可以先部署好tars协议
+3. 在管理界面找到QD.UserService服务，点击管理servant，点击添加。
+4. obj名称 HttpObj，线程数随意，绑定地址 tcp -h {你的ip} -t 60000 -p {http服务端口} -e 0 选择非tars
+5. 保存后重启服务，尝试访问 http://{你的ip}:{http服务端口}/user/index 可以返还 hello word
+6. 可以访问 尝试访问 http://{你的ip}:{http服务端口}/user/getUsersInfoByIds?ids=8001等 测试你的服务逻辑
+7. 通常tars协议提供给业务调用，http协议用于测试。 业务逻辑建议统一封装到service层，http 和tars 做两个入口
+
+
 #	其他
 
 1. 没有登出功能，如果你需要登出 可以清一下cookie
