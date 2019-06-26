@@ -62,18 +62,20 @@ Yii2集成微服务治理框架Tars
    ]
    ```
 
-5. 如果需要使用配置中心(TarsConfig)或者日志服务(TarsLog)，修改配置文件src/config/params.php文件tars字段
+5. 配置中心(TarsConfig)或者日志服务(TarsLog)，修改配置文件src/config/params.php文件tars字段
 
-   ```php
-   'tarsregistry' => 'tars.tarsregistry.QueryObj@tcp -h 172.17.0.3 -p 17890' //根据实际情况填写，TarsConfig配置文件名称固定为'tars'
-   ```
-   
-   服务启动时会自动拉取配置，如果需要记录日志，可以使用类似```Log::info('test log');```
+   服务启动时会自动拉取配置，如果需要记录日志，可以使用类似```Yii::info('test log');```
    
    如果需要指定TarsLog记录的最低日志级别，修改配置文件src/config/params.php文件tars字段
    
    ```php
    'log_level' => \Monolog\Logger::INFO
+   ```
+
+   如果需要指定TarsLog的记录频率，修改配置文件src/config/params.php文件tars字段
+
+   ```php
+   'log_interval' => 1000
    ```
 
 6. 如果使用http协议，按框架原生方式编写代码，路由没有特殊要求
