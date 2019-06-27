@@ -42,11 +42,7 @@ Yii2集成微服务治理框架Tars
    初始化Yii2 Tars
 
    ```
-   //如果使用http协议，则执行此行命令
-   ./yii tars/publish tars.http
-
-   //如果使用tars协议，则执行此行命令
-   ./yii tars/publish tars.tars
+   ./yii tars/publish
    ```
 
 3. 修改配置文件src/config/params.php文件tars字段下的proto字段，替换appName、serverName、objName
