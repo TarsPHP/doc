@@ -51,11 +51,7 @@ Laravel集成微服务治理框架Tars
    初始化Laravel Tars
 
    ```
-   //如果使用http协议，则执行此行命令
-   php artisan vendor:publish --tag=tars.http
-
-   //如果使用tars协议，则执行此行命令
-   php artisan vendor:publish --tag=tars.tars
+   php artisan vendor:publish --tag=tars
    ```
 
 3. 修改配置文件src/config/tars.php文件proto字段，替换appName、serverName、objName
