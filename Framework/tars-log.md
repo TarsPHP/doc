@@ -69,3 +69,29 @@ $logger->error("add a error message", $array);
 $logger->critical("add a critical message", $array);
 $logger->emergency("add a emergency message", $array);
 ```
+
+### 结合ELK
+远程日志按应用与服务区分，位于`/usr/local/app/tars/remote_app_log/{App}/{ServerName}`，在实际业务中，可以通过`filebeat` 或 `logstash` 将远程日志同步到`ElasticSearch`。
+
+除此之外`monolog` 本身提供了`ElasticSearchHandler`，可以非常方便的把日志直接输出到`ElasticSearch`。
+
+使用之前需要在composer中引入`ruflin/elastica` 包。
+> 注：截止到本文更新前，`ruflin/elastica` 的 release版只支持至 elasticsearch:6.*版本，想使用elasticsearch:7.*的同学可以使用 `elasticsearch/elasticsearch` 包自行封装 handler 
+
+示例代码如下：
+
+```php
+$logger = new \Monolog\Logger("elk_logger");
+$client = new \Elastica\Client([
+	'host' => '127.0.0.1',
+	'port' => 9200
+]);
+$elkHanlder = new Monolog\Handler\ElasticSearchHandler($client, [
+	'index' => 'monolog_index_test',
+	'type' => 'record'
+]);
+
+$logger->pushHandler($elkHanlder);
+
+$logger->error("this is a test msg from monolog");
+```
