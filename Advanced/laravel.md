@@ -9,6 +9,7 @@ Laravel集成微服务治理框架Tars
 * 支持echo输出内容
 * 支持http和tars协议
 * 支持zipkin分布式追踪(已移除，可以使用[laravel-zipkin扩展包](https://github.com/luoxiaojun1992/laravel-zipkin))
+* 受限于框架本身的设计，不支持协程
 
 # 相关项目
 * LaravelTars (https://github.com/luoxiaojun1992/laravel-tars)

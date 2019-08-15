@@ -8,6 +8,7 @@ Yii2集成微服务治理框架Tars
 * 支持请求开始(tarsRequesting)、请求结束(tarsRequested)事件
 * 支持echo输出内容
 * 支持http和tars协议
+* 受限于框架本身的设计，不支持协程
 
 # 相关项目
 * Yii2Tars (https://github.com/luoxiaojun1992/yii2-tars)
