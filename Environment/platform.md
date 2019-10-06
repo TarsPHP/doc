@@ -165,7 +165,7 @@ make tarsqueryproperty-tar
 mkdir -p /usr/local/app/tars
 cp {$source_folder}/build/framework.tgz /usr/local/app/tars
 cd /usr/local/app/tars
-tar zxvf framwork.tgz
+tar zxvf framework.tgz
 ```
 
 修改各个服务对应conf目录下配置文件，注意将配置文件中的ip地址修改为本机内网ip地址。
@@ -202,9 +202,17 @@ git clone https://github.com/TarsCloud/TarsWeb
 修改源码中的配置文件，将配置文件中的ip地址改成本机内网ip地址
 
 ```$xslt
-cd {$web_source_folder}/web
+cd {$web_source_folder}
 sed -i 's/db.tars.com/${your_machine_ip}/g' config/webConf.js
 sed -i 's/registry.tars.com/${your_machine_ip}/g' config/tars.conf
+```
+
+安装web管理页面依赖，启动web
+
+```$xslt
+cd {$web_source_folder}
+npm install --registry=https://registry.npm.taobao.org
+npm run prd
 ```
 
 创建日志目录
