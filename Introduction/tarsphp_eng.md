@@ -1,0 +1,119 @@
+
+# TARSPHP简介
+# TARSPHP Introduction
+
+
+TARSPHP作为TARS在PHP语言的解决方案, 设计的时候主要考虑如下三个方面: 
+TARSPHP, as a solution for TARS in the PHP language, is designed with the following three aspects in mind:
+
+* 功能完善: 对标现有C++、JAVA、NodeJS体系功能
+* 灵活: 论灵活, 谁与PHP争锋?
+* 轻量: 用最轻量的设计, 点到即止, 即插即用
+* 高效: 插上SWOOLE协程的翅膀, 不得不飞
+
+
+* Perfect functions: benchmark existing C ++, JAVA, NodeJS system functions
+* Flexible: On flexibility, who is competing with PHP?
+* Lightweight: With the lightest design, click to stop, plug and play
+* Efficient: Plug in the wings of the SWOOLE coroutine and have to fly
+
+## 功能完善
+## Perfect function
+
+
+TARSPHP主要实现了如下功能模块:
+* TARS-CLIENT
+* TARS-SERVER
+* TARS-EXT扩展
+* TARS2PHP工具
+
+TARSPHP mainly implements the following functional modules:
+* TARS-CLIENT
+* TARS-SERVER
+* TARS-EXT expansion
+* TARS2PHP tool
+
+另有一些其他模块, 可在[Framework](../Framework/introduce.md)进行查看。
+There are other modules, which can be viewed in [Framework] (../ Framework / introduce.md).
+
+从宏观上来讲, 使用TARSPHP你可以做这些事:
+* 启动一个HTTP服务, QPS达到万级
+* 启动一个二进制协议的TCP服务, QPS达到十几万级
+* 启动一个定时服务, 其中可以统一管理一定数量的定时服务(与worker数量相等)
+* 启动一个Websocket服务, 与浏览器进行ws协议的交互
+* 调用其他支持TARS协议的服务(不限语言)
+
+From a macro perspective, using TARSPHP you can do these things:
+* Start an HTTP service, QPS reaches 10,000
+* Start a TCP protocol with binary protocol, QPS reaches 100,000
+* Start a timer service, which can uniformly manage a certain number of timer services (equal to the number of workers)
+* Start a Websocket service to interact with the browser with the ws protocol
+* Invoke other services that support the TARS protocol (unlimited languages)
+
+
+从细分模块上来讲, 你可以:
+* 向TARS的本地和远程目录写日志
+* 向TARS监控上报调用监控以获得图表展示
+* 将TARS服务打包发布
+* 拉取TARS平台的配置
+* 拉取其他服务的地址
+* 解析TARS平台的配置文件
+
+From the segmentation module, you can:
+* Write logs to local and remote directories of TARS
+* Report to TARS monitor to call monitor to obtain chart display
+* Package and release the TARS service
+* Pull the configuration of the TARS platform
+* Address to pull other services
+* Parse the configuration file of the TARS platform
+
+
+## 灵活
+## Flexible
+
+从灵活性上来讲, TARSPHP做了很多优化。
+In terms of flexibility, TARSPHP has made a lot of optimizations.
+
+以TARS-CLIENT为例, 它的使用者既可以是后台系统, 比如Laravel。 也可以是SWOOLE同步的客户端, 更可以是SWOOLE协程的客户端。
+Take TARS-CLIENT as an example, its users can be both back-end systems, such as Laravel. It can also be a client of SWOOLE synchronization, and it can also be a client of SWOOLE coroutine.
+
+这三种情况, 兼顾了不同的应用场景, 使用者是需要按需配置即可。
+These three situations take into account different application scenarios, and users need to configure as needed.
+
+除此之外, TARS-LOG模块, 既支持本地的日志, 也支持远程的日志, 使用者也可以灵活的选择。
+In addition, the TARS-LOG module supports both local logs and remote logs. Users can also choose flexibly.
+
+## 轻量
+## Lightweight
+
+为了最大程度的提高性能, 并支持其他现有成熟框架的扩展, 我们并没有实现非常繁重的框架逻辑。而只是给出了实现的guideline, 让开发者可以自行根据自己的情况进行定制。
+In order to maximize performance and support the extension of other existing mature frameworks, we have not implemented very heavy framework logic. Instead, it only provides an implementation guideline, so that developers can customize it according to their own circumstances.
+
+比如现有社区中, 基于TARSPHP, 已有如下扩展的案例:
+For example, in the existing community, based on TARSPHP, there have been extended cases as follows:
+
+* [与Kong结合](https://tangramor.gitlab.io/tars-docker-guide/3.TARS-PHP-HTTP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/)
+* [与PHALCON结合]()
+* [与SWOFT结合](../Advanced/swoft.md)
+* [与Laravel结合](../Advanced/laravel.md)
+* [与Yii2结合](../Advanced/yii2.md)
+
+后续我们也会尝试接入更多的框架, 从而更好的服务开发者。
+We will also try to connect more frameworks in the future to better serve developers.
+
+## 高效
+在性能方面, TARSPHP也一直在追求极致:
+* 使用SWOOLE作为服务容器
+* 使用PHP扩展进行二进制流的打包和解包
+* 对服务端的路由配置进行预热, 减少路由时间
+* 对寻址信息进行本地缓存, 降低耗时
+* 对日志写入、监控上报、服务保活上报进行异步化处理,绝不阻塞
+
+
+## Efficient
+In terms of performance, TARSPHP has also been pursuing the extreme:
+* Use SWOOLE as a service container
+* Packaging and unpacking of binary streams using PHP extensions
+* Preheat the routing configuration on the server to reduce routing time
+* Locally cache addressing information to reduce time consumption
+* Asynchronous processing of log writing, monitoring and reporting, and service keepalive reporting without blocking
