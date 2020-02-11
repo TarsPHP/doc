@@ -25,6 +25,7 @@ At the same time,relatively different functionality will be developed for differ
 高性能是各种语言开发时应该遵循的重要准则。使用目前支持的语言开发的服务, 均已经过大流量的线上验证, 符合业务的高并发与高可用要求。
 High-performance is a important guidelines when develop service and client with different languages. Services which developed using TARS support languages ​​have been verified online with high flow capacity, and meet the high concurrency and high availability requirements.
                     the first priority when developing services and clients.As for now, high QPS benchmarks.
+
 ## 敏捷研发
 首先，使用TARS可以快速的构建微服务。
 First,TARS can quickly build microservices.

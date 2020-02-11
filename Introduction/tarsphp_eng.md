@@ -3,23 +3,21 @@
 # TARSPHP Introduction
 
 
-TARSPHP作为TARS在PHP语言的解决方案, 设计的时候主要考虑如下三个方面: 
-TARSPHP, as a solution for TARS in the PHP language, is designed with the following three aspects in mind:
+TARSPHP作为TARS在PHP语言的解决方案，设计的时候主要考虑如下四个方面：
+TARSPHP, as a solution for TARS in PHP, is designed with four aspects:
 
-* 功能完善: 对标现有C++、JAVA、NodeJS体系功能
+* 功能完善: 对标现有C++、JAVA、NodeJS体系功能。
 * 灵活: 论灵活, 谁与PHP争锋?
-* 轻量: 用最轻量的设计, 点到即止, 即插即用
-* 高效: 插上SWOOLE协程的翅膀, 不得不飞
+* 轻量: 用最轻量的设计, 点到即止, 即插即用。
+* 高效: 插上SWOOLE协程的翅膀, 不得不飞。
 
-
-* Perfect functions: benchmark existing C ++, JAVA, NodeJS system functions
-* Flexible: On flexibility, who is competing with PHP?
-* Lightweight: With the lightest design, click to stop, plug and play
-* Efficient: Plug in the wings of the SWOOLE coroutine and have to fly
+* Perfect functions: benchmark with C++, JAVA, NodeJS. (这句没听懂，不太清楚怎么翻译)
+* Flexible: PHP is Flexible.
+* Lightweight: lightweight design, plug and play.
+* Efficient: support coroutine with SWOOLE.
 
 ## 功能完善
 ## Perfect function
-
 
 TARSPHP主要实现了如下功能模块:
 * TARS-CLIENT
@@ -27,61 +25,59 @@ TARSPHP主要实现了如下功能模块:
 * TARS-EXT扩展
 * TARS2PHP工具
 
-TARSPHP mainly implements the following functional modules:
+main functional modules of TARSPHP:
 * TARS-CLIENT
 * TARS-SERVER
-* TARS-EXT expansion
-* TARS2PHP tool
+* TARS-EXT 
+* TARS2PHP 
 
 另有一些其他模块, 可在[Framework](../Framework/introduce.md)进行查看。
-There are other modules, which can be viewed in [Framework] (../ Framework / introduce.md).
+There are other functional modules in [Framework] (../ Framework / introduce.md).
 
 从宏观上来讲, 使用TARSPHP你可以做这些事:
 * 启动一个HTTP服务, QPS达到万级
 * 启动一个二进制协议的TCP服务, QPS达到十几万级
-* 启动一个定时服务, 其中可以统一管理一定数量的定时服务(与worker数量相等)
+* 启动一个定时服务, 可以统一管理一定数量的定时任务(与worker数量相等)
 * 启动一个Websocket服务, 与浏览器进行ws协议的交互
 * 调用其他支持TARS协议的服务(不限语言)
 
-From a macro perspective, using TARSPHP you can do these things:
-* Start an HTTP service, QPS reaches 10,000
-* Start a TCP protocol with binary protocol, QPS reaches 100,000
-* Start a timer service, which can uniformly manage a certain number of timer services (equal to the number of workers)
-* Start a Websocket service to interact with the browser with the ws protocol
-* Invoke other services that support the TARS protocol (unlimited languages)
+You can do following thins using TARSPHP:
+* Start a HTTP service which can load 10,000 QPS.
+* Start a TCP service with binary protocol which can load 100,000 QPS.
+* Start a timer service, which can manage a certain number of timer tasks(equal to the number of workers).
+* Start a Websocket service, which can interact with the browser using ws protocol.
+* Invoke TARS services(unlimited languages).
 
+从细分模块上来讲，你可以：
+* 向TARS的本地和远程目录写日志。
+* 向TARS监控上报调用监控以获得图表展示。
+* 将TARS服务打包发布。
+* 拉取TARS平台的配置。
+* 拉取其他服务的地址。
+* 解析TARS平台的配置文件。
 
-从细分模块上来讲, 你可以:
-* 向TARS的本地和远程目录写日志
-* 向TARS监控上报调用监控以获得图表展示
-* 将TARS服务打包发布
-* 拉取TARS平台的配置
-* 拉取其他服务的地址
-* 解析TARS平台的配置文件
-
-From the segmentation module, you can:
-* Write logs to local and remote directories of TARS
-* Report to TARS monitor to call monitor to obtain chart display
-* Package and release the TARS service
-* Pull the configuration of the TARS platform
-* Address to pull other services
-* Parse the configuration file of the TARS platform
-
+You can use functions following using TARSPHP:
+* Write local and remote logs at the same time.
+* View chart of the RPC call information which reported to TARS monitor.
+* Package and release TARS services.
+* Pull configurations of TARS platform.
+* Pull other services Address.
+* Parse configuration file of TARS platform.
 
 ## 灵活
 ## Flexible
 
 从灵活性上来讲, TARSPHP做了很多优化。
-In terms of flexibility, TARSPHP has made a lot of optimizations.
+TARSPHP has made a lot of optimizations for better flexibility.
 
 以TARS-CLIENT为例, 它的使用者既可以是后台系统, 比如Laravel。 也可以是SWOOLE同步的客户端, 更可以是SWOOLE协程的客户端。
-Take TARS-CLIENT as an example, its users can be both back-end systems, such as Laravel. It can also be a client of SWOOLE synchronization, and it can also be a client of SWOOLE coroutine.
+For example, TARS-CLIENT can be used by a back-end systems such as Laravel, it also can be used by a synchronization SWOOLE client or a coroutines SWOOLE client.
 
 这三种情况, 兼顾了不同的应用场景, 使用者是需要按需配置即可。
-These three situations take into account different application scenarios, and users need to configure as needed.
+These three solutions can deal with different application scenarios.
 
 除此之外, TARS-LOG模块, 既支持本地的日志, 也支持远程的日志, 使用者也可以灵活的选择。
-In addition, the TARS-LOG module supports both local logs and remote logs. Users can also choose flexibly.
+In addition, TARS-LOG supports both local logs and remote logs.
 
 ## 轻量
 ## Lightweight
