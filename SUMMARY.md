@@ -40,8 +40,8 @@
 * [搭建java server]()
 * [持续集成方案](Advanced/ci.md)
 
-## 其他
-* [常见问题](Question/index.md)
-* [如何Debug](Question/debug.md)
-* [changelog](Question/changelog.md)
-* [其他外部文档](Question/outsource.md)
+## Others
+* [Common Problems](Question/index.md)
+* [How to Debug](Question/debug.md)
+* [Change Log](Question/changelog.md)
+* [Other External Documents](Question/outsource.md)
