@@ -3,24 +3,28 @@
 TARS Features
 
 ## 多语言
-TARS最早使用C++语言进行开发，后续随着业务的发展，逐步实现了C++/JAVA/PHP/NodeJS/Go的服务端和客户端功能。
-TARS was developed using C++ at first. With the development of the business, the C++ / JAVA / PHP / NodeJS / Go server and client were gradually achieved.
+TARS最早使用C++语言进行开发，随着业务的发展，逐步实现了C++/JAVA/PHP/NodeJS/Go的服务端和客户端。
+TARS was developed using C++ initially. Through the development, the C++ / JAVA / PHP / NodeJS / Go server and client were gradually achieved.
+TARS was developed using C++ initially, and accomplished C++/JAVA/PHP/NodeJS/Go servers and clients through the development.
 
 也可以使用Python语言等作为客户端，进行服务的调用。
 Other languages client such as Python client also can make service calls. 
+Tars could also be called as a service leveraging other programming language such as python as a client. 
 
 更多语言，包括C#等，也在逐步的开发中。
 More languages server and client are being gradually developed including C# etc.
+Clients of others languages  including C# is under active development continually.
 
 各语言均已支持基本的RPC能力，不同语言之间，使用统一的接口定义语言tars来约定协议。
-Different languages achieve basic RPC capabilities through contract agreement with a unified interface define language ———— tars. 
+Basic RPC functionality is supported by a variety of languages, and a unified interface description language —— tars —— could be used to make contract.
+Different languages achieve basic RPC capabilities through contract agreement with . 
 
 同时，TARS会针对各种语言的不同特性, 开发相对差异化的功能。
-At the same time,relatively different functions will be developed for different language features.
+At the same time,relatively different functionality will be developed for different language features.
 
 高性能是各种语言开发时应该遵循的重要准则。使用目前支持的语言开发的服务, 均已经过大流量的线上验证, 符合业务的高并发与高可用要求。
 High-performance is a important guidelines when develop service and client with different languages. Services which developed using TARS support languages ​​have been verified online with high flow capacity, and meet the high concurrency and high availability requirements.
-
+                    the first priority when developing services and clients.As for now, high QPS benchmarks.
 ## 敏捷研发
 首先，使用TARS可以快速的构建微服务。
 First,TARS can quickly build microservices.
