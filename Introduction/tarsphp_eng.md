@@ -2,22 +2,21 @@
 # TARSPHP简介
 # TARSPHP Introduction
 
-
 TARSPHP作为TARS在PHP语言的解决方案，设计的时候主要考虑如下四个方面：
-TARSPHP, as a solution for TARS in PHP, is designed with four aspects:
+TARSPHP, as a solution for TARS in PHP, was designed with four priority:
 
 * 功能完善：对标现有C++、JAVA、NodeJS体系功能。
 * 灵活：论灵活，谁与PHP争锋?
 * 轻量：用最轻量的设计，点到即止, 即插即用。
 * 高效：插上SWOOLE协程的翅膀，不得不飞。
 
-* Perfect functions: benchmark with C++, JAVA, NodeJS. (这句没听懂，不太清楚怎么翻译)
+* sufficient functionality: integret with available abilities within C++, Java and NodeJS.
 * Flexible: PHP is Flexible.
 * Lightweight: lightweight design, plug and play.
-* Efficient: support coroutine with SWOOLE.
+* Highly Efficient: support coroutine with SWOOLE.
 
 ## 功能完善
-## Perfect function
+## Sufficient Functionality
 
 TARSPHP主要实现了如下功能模块：
 * TARS-CLIENT
@@ -41,12 +40,12 @@ There are other functional modules in [Framework] (../ Framework / introduce.md)
 * 启动一个Websocket服务，与浏览器进行ws协议的交互
 * 调用其他支持TARS协议的服务(不限语言)
 
-On the one hand,You can do things withs TARSPHP including:
-* Start a HTTP service which can load 10,000 QPS.
-* Start a TCP service with binary protocol which can load 100,000 QPS.
+From the big picture ,You could do things withs TARSPHP including:
+* Start an HTTP service with maximum QPS reaching ten thousands.
+* Start a TCP service with binary protocol with maximum QPS reaching a 100,000.
 * Start a timer service, which can manage a certain number of timer tasks(equal to the number of workers).
 * Start a Websocket service, which can interact with the browser using ws protocol.
-* Invoke TARS services(unlimited languages).
+* Invoke TARS services( language agnostic).
 
 从细分模块上来讲，你可以：
 * 向TARS的本地和远程目录写日志。
@@ -56,7 +55,7 @@ On the one hand,You can do things withs TARSPHP including:
 * 拉取其他服务的地址。
 * 解析TARS平台的配置文件。
 
-On the other hand,You can use functions following using TARSPHP:
+From the smaller module's point of view, you could:
 * Write local and remote logs at the same time.
 * View chart of the RPC call information which reported to TARS monitor.
 * Package and release TARS services.
@@ -71,7 +70,7 @@ On the other hand,You can use functions following using TARSPHP:
 TARSPHP has made a lot of optimizations for better flexibility.
 
 以TARS-CLIENT为例，它的使用者既可以是后台系统，比如Laravel，也可以是SWOOLE同步的客户端, 更可以是SWOOLE协程的客户端。
-For example, TARS-CLIENT can be used by a back-end systems such as Laravel, it also can be used by a synchronization SWOOLE client or a coroutines SWOOLE client.
+In the case of TARS-CLIENT, it can be used by a back-end systems such as Laravel,  a synchronization SWOOLE client, or a coroutines SWOOLE client.
 
 这三种情况，兼顾了不同的应用场景，使用者是需要按需配置即可。
 These three solutions can deal with different application scenarios.
@@ -83,10 +82,10 @@ In addition, TARS-LOG supports both local logs and remote logs.
 ## Lightweight
 
 为了最大程度的提高性能和与其他成熟框架进行扩展，我们选择实现轻量的框架，同时提供实现其他功能的指南，让开发者可以根据自己的情况进行定制。
-In order to maximize performance and support extend with other mature frameworks, we design TARSPHP lightweight and provide an implementation guideline to developers to customize function according to their own circumstances.
+In order to maximize performance and support extension with other mature frameworks, we designed TARSPHP in lightweight and provide an implementation guideline to developers to customize function according to their own needs.
 
 现有社区中，已有不少TARSPHP与成熟框架进行扩展的案例:
-There are some cases that TARSPHP extend with frameworks inside community including:
+There are some cases where TARSPHP extends with frameworks inside the community including:
 
 * [与Kong结合](https://tangramor.gitlab.io/tars-docker-guide/3.TARS-PHP-HTTP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/)
 * [与PHALCON结合]()
@@ -94,14 +93,14 @@ There are some cases that TARSPHP extend with frameworks inside community includ
 * [与Laravel结合](../Advanced/laravel.md)
 * [与Yii2结合](../Advanced/yii2.md)
 
-* [Combined with ong](https://tangramor.gitlab.io/tars-docker-guide/3.TARS-PHP-HTTP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/)
-* [Combined with PHALCON]()
-* [Combined with SWOFT](../Advanced/swoft.md)
-* [Combined with Laravel](../Advanced/laravel.md)
-* [Combined with Yii2](../Advanced/yii2.md)
+* [Integrated with ong](https://tangramor.gitlab.io/tars-docker-guide/3.TARS-PHP-HTTP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/)
+* [Integrated with PHALCON]()
+* [Integrated with SWOFT](../Advanced/swoft.md)
+* [Integrated with Laravel](../Advanced/laravel.md)
+* [Integrated with Yii2](../Advanced/yii2.md)
 
 我们会不断尝试接入更多的框架，从而更好的为开发者服务。
-We will try to combined with more frameworks in the future to service developers better.
+We will try to integrate with more frameworks in the future to serve developers better.
 
 ## 高效
 在性能方面，TARSPHP也一直在追求极致:
@@ -112,10 +111,10 @@ We will try to combined with more frameworks in the future to service developers
 * 对日志写入、监控上报、服务保活上报进行异步化处理，绝不阻塞。
 
 
-## Efficient
+## Highly Efficient
 TARSPHP always pursue extreme performance:
 * Use SWOOLE as a service container.
 * Use PHP extensions to pack and unpack binary streams.
 * Preheat the routing configuration on the server to reduce routing time.
 * Locally cache addressing information to reduce time consumption.
-* Asynchronous processing of log writing, monitoring reporting and service keepalive reporting to prevent block.
+* Asynchronousl'y process log writing, monitoring and service keepalive reporting to prevent block.
