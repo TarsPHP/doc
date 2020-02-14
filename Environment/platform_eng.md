@@ -199,16 +199,13 @@ make tarsqueryproperty-tar
 ```
 
 命令执行后，会在当前目录生成基础服务发布包，可以在管理平台部署完成后，通过管理平台进行部署发布。
-After the command is executed, the basic service release package is generated in the current directory. After the deployment of the management platform is completed, the deployment and release can be performed through the management platform.
-
+Command will generate basic service release package in the current directory which can be released by operation platform.
 
 #####6.3 安装核心基础服务
 ##### 6.3 Install Core Basic Services
 
-
 将核心基础服务包copy到/usr/local/app/tars目录下，并解压。
-Copy the core basic service package to the / usr / local / app / tars directory and extract it.
-
+Copy the core basic service package to the `/usr/local/app/tars` and then extract it.
 
 ```
 mkdir -p /usr/local/app/tars
@@ -217,9 +214,8 @@ cd /usr/local/app/tars
 tar zxvf framework.tgz
 ```
 
-修改各个服务对应conf目录下配置文件，注意将配置文件中的ip地址修改为本机内网ip地址。
-Modify the configuration files in the conf directory corresponding to each service. Pay attention to changing the IP address in the configuration file to the local network IP address.
-
+修改各个服务对应conf目录下的配置文件，注意将配置文件中的ip地址修改为本机内网ip地址。
+Modify the configuration files of each service, pay attention to changing the IP address to your local network IP address.
 
 ```$xslt
 cd /usr/local/app/tars
@@ -229,9 +225,8 @@ sed -i "s/registry.tars.com/${your_machine_ip}/g" `grep registry.tars.com -rl ./
 sed -i "s/web.tars.com/${your_machine_ip}/g" `grep web.tars.com -rl ./*`
 ```
 
-然后在/usr/local/app/tars/目录下，执行脚本，启动tars框架服务。
-Then execute the script in the / usr / local / app / tars / directory to start the tars framework service.
-
+然后在`/usr/local/app/tars/`目录下，执行脚本，启动tars框架服务。
+Then execute the script in `/usr/local/app/tars/` to start the tars framework.
 
 ```$xslt
 chmod u+x tars_install.sh
@@ -239,8 +234,7 @@ chmod u+x tars_install.sh
 ```
 
 部署管理平台并启动web管理平台
-Deploy management platform and launch web management platform
-
+Deploy management platform and launch it.
 
 ```$xslt
 tarspatch/util/init.sh
@@ -249,18 +243,15 @@ tarspatch/util/init.sh
 #####6.4.安装web管理平台
 ##### 6.4. Install web management platform
 
-
 下载web源码
-Download web source
-
+Download web source.
 
 ```$xslt
 git clone https://github.com/TarsCloud/TarsWeb
 ```
 
-修改源码中的配置文件，将配置文件中的ip地址改成本机内网ip地址
-Modify the configuration file in the source code and change the ip address in the configuration file to the internal network IP address
-
+修改源码中的配置文件，将配置文件中的ip地址改成本机内网ip地址。
+Modify the configuration file of source code and change the ip address to your internal network IP address.
 
 ```$xslt
 cd {$web_source_folder}
@@ -268,9 +259,8 @@ sed -i 's/db.tars.com/${your_machine_ip}/g' config/webConf.js
 sed -i 's/registry.tars.com/${your_machine_ip}/g' config/tars.conf
 ```
 
-安装web管理页面依赖，启动web
-Install web management page dependency and start web
-
+安装web管理页面依赖，启动web。
+Install and start web management page.
 
 ```$xslt
 cd {$web_source_folder}
@@ -278,72 +268,62 @@ npm install --registry=https://registry.npm.taobao.org
 npm run prd
 ```
 
-创建日志目录
-Create log directory
-
+创建日志目录。
+Create log directory.
 
 ```$xslt
 mkdir -p /data/log/tars
 ```
 
 访问站点 浏览器输入${your machine ip}:3000，即可看到web管理界面，如访问不了，可尝试关闭防火墙。
-Visit the site and enter $ {your machine ip}: 3000 in your browser to see the web management interface. If you ca n’t access it, you can try to close the firewall.
-
+Visit `${your machine ip}:3000` in your browser，then you can see the web management interface. If you can’t access it, please try to close the firewall.
 
 ![alt text](https://github.com/TarsCloud/Tars/raw/master/docs/images/tars_web_system_index.png)
 
 #####6.5 安装普通基础服务
 ##### 6.5 Install common basic services
 
-
 **平台部署的端口号仅供参考，保证端口无冲突即可**
-** The port numbers deployed on the platform are for reference only, you can ensure that the ports have no conflicts **
+**Ensure the ports have no conflicts,the port used in this article just for reference.**
 
+在安装核心基础服务时，普通基础服务的部署信息已经初始化了，因此此处只要进行发布即可，以下以tarsstat为例进行操作说明。
+The deployment information of the common basic service has been initialized while installing the core basic service. Therefore, you only need to publish it in operation platform. There describe operations of install tarsstat.
 
-在安装核心基础服务是，普通基础服务的部署信息已经初始化化了，因此此处只要进行发布即可，以下以tarsstat为例进行操作说明。
-When installing the core basic service, the deployment information of the common basic service has been initialized. Therefore, you only need to publish it here. The following uses tarsstat as an example for operation description.
-
-
-点击运维管理 => 服务部署
-Click Operations Management => Service Deployment
-
+点击`运维管理` => `服务部署`
+Click `Operations Management` => `Service Deployment`
 
 ![alt_text](https://github.com/TarsCloud/Tars/raw/master/docs/images/tars_tarsstat_bushu.png)
 
-点击服务管理 => 选中一个服务 => 发布管理，上传发布包，即6.2中生成的基础发布包，点击发布即可。
-Click service management => select a service => release management, upload the release package, which is the basic release package generated in 6.2, and click release.
-
+点击`服务管理` => 选中一个服务 => `发布管理`，上传发布包，即6.2中生成的基础发布包，点击发布即可。
+Click `service management` => select a service => `release management`, upload the release package, which is the basic release package generated in 6.2, and click release.
 
 ![alt_text](https://github.com/TarsCloud/Tars/raw/master/docs/images/tars_tarsnotify_patch.png)
 
 按照此方式逐个部署tarsnotify、tarsproperty、tarslog、tarsquerystat、tarsqueryproperty。
 Deploy tarsnotify, tarsproperty, tarslog, tarsquerystat, tarsqueryproperty one by one in this way.
 
-
 **注意在服务部署页面选择服务相应的模板，如tarsstat模板为tars.tarsstat, tarsproperty模板为tars.tarsproperty。**
-** Please select the corresponding template of the service on the service deployment page. For example, the tarsstat template is tars.tarsstat and the tarsproperty template is tars.tarsproperty. **
-
+**Please select the corresponding template of the service on the service deployment page. For example, the tarsstat template is tars.tarsstat and the tarsproperty template is tars.tarsproperty.**
 
 **注意tarsquerystat、tarsqueryproperty的协议选择非TARS，其他选择为TARS。**
-** Note that the protocol of tarsquerystat and tarsqueryproperty is non-TARS, and other options are TARS. **
-
-
+**Note that the protocol of tarsquerystat and tarsqueryproperty is non-TARS, and other options are TARS.**
 
 ## 附录
 * 安装前请先按照此页面介绍准备好软件https://github.com/TarsCloud/Tars/tree/master/build
-* 建议先阅读下文件内容 https://github.com/TarsCloud/Tars/blob/master/build/install.sh 
+* 建议先阅读下文内容 https://github.com/TarsCloud/Tars/blob/master/build/install.sh 
     （因实际上有些软件依赖在某些脚本中会自动安装，避免重复劳动，熟悉大致的脚本安装过程）
-* 参考前两部分内容，接下来按照安装说明进行安装 https://github.com/TarsCloud/Tars/blob/master/Install.zh.md 
+* 参考前两部分内容，接下来按照安装说明进行安装 https://github.com/TarsCloud/Tars/blob/master/Install.zh.md
 * 安装中遇到的常见问题和注意事项，可阅读 https://github.com/TarsCloud/Tars/blob/master/Install_faq.zh.md
+(试了下，上面4个页面都404了)
 * 安装教学视频 https://www.bilibili.com/video/av47290510/ 
 
 ## Appendix
-* Please prepare the software according to this page before installing https://github.com/TarsCloud/Tars/tree/master/build
-* It is recommended to read the contents of the file first https://github.com/TarsCloud/Tars/blob/master/build/install.sh
-    (In fact, some software dependencies are automatically installed in some scripts to avoid repeated labor and familiar with the general script installation process)
-* Refer to the first two parts, then follow the installation instructions to install https://github.com/TarsCloud/Tars/blob/master/Install.zh.md
-* For common problems and precautions encountered during installation, please read https://github.com/TarsCloud/Tars/blob/master/Install_faq.zh.md
-* Installation instruction video https://www.bilibili.com/video/av47290510/
+* Please prepare software according to this page before installing: https://github.com/TarsCloud/Tars/tree/master/build
+* It is recommended to read this page first: https://github.com/TarsCloud/Tars/blob/master/build/install.sh
+    (In fact, dependencies of some software are automatically installed in scripts to avoid repeated labor, but it is better to familiar with the general script installation process)
+* You also can install TARS with this installation instructions: https://github.com/TarsCloud/Tars/blob/master/Install.zh.md
+* For common problems and precautions encountered during installation, please read: https://github.com/TarsCloud/Tars/blob/master/Install_faq.zh.md
+* Installation instruction video: https://www.bilibili.com/video/av47290510/
     
 # 快速安装
 # Quick installation
