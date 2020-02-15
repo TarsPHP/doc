@@ -1,4 +1,3 @@
-
 # 这是什么
 
 这是一个用Tars部署的弹幕活动项目，其中包含3个服务。
@@ -20,7 +19,7 @@ user_info.sql是QD.UserServer服务的用户信息表
 ~~~json
 [
   {
-    "host": "mysql.tarsActDemo.local //这是是你的mysql地址",
+    "host": "mysql.tarsActDemo.local",  //这是是你的mysql地址
     "port": 3306,
     "username": "root",
     "password": "password",
