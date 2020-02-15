@@ -7,7 +7,7 @@
 
 ### 1.安装各种工具
 
-C++语言框架依赖
+C++语言框架依赖。
 
 ```
 yum update -y
@@ -27,7 +27,7 @@ yum install mysql mysql-devel mysql-server mysql-utilities -y
 
 ### 3.安装pm2
 
-Web管理系统依赖
+Web管理系统依赖。
 
 ```
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
@@ -48,7 +48,7 @@ git clone https://github.com/TarsCloud/TarsFramework.git
 
 **查看源码目录下的CMakeLists.txt文件，确保MYSQL的相关路径配置与本机一致。**
 
-比如，在centos7.2使用yum安装mysql，mysql的lib文件默认放在/usr/lib64/mysql，include文件夹默认在/usr/include/mysql/，可将CMakeLists.txt文件中的MYSQL_DIR_LIB改为"/usr/lib64/mysql"；也可使用cp -r /usr/include/mysql/* /usr/local/mysql/include将文件copy到指定路径/usr/local/mysql/include，如下：
+比如，在centos7.2使用yum安装mysql，mysql的lib文件默认放在`/usr/lib64/mysql`，include文件夹默认在`/usr/include/mysql/`，可将CMakeLists.txt文件中的MYSQL_DIR_LIB改为"/usr/lib64/mysql"；也可使用`cp -r /usr/include/mysql/* /usr/local/mysql/include`将文件copy到指定路径`/usr/local/mysql/include`，如下：
 
 ```
 set(MYSQL_DIR_INC "/usr/local/mysql/include")
@@ -89,7 +89,7 @@ service mysqld restart
 
 #####5.2 添加用户
 
-${your machine ip}需要修改成自身机器内网ip，可以通过ifconfig查看。
+${your machine ip}需要修改成自身机器内网ip，可以通过`ifconfig`查看。
 
 ```
 grant all on *.* to 'tars'@'%' identified by 'tars2015' with grant option;
@@ -168,7 +168,7 @@ cd /usr/local/app/tars
 tar zxvf framework.tgz
 ```
 
-修改各个服务对应conf目录下配置文件，注意将配置文件中的ip地址修改为本机内网ip地址。
+修改各个服务对应conf目录下的配置文件，注意将配置文件中的ip地址修改为本机内网ip地址。
 
 ```$xslt
 cd /usr/local/app/tars
@@ -178,7 +178,7 @@ sed -i "s/registry.tars.com/${your_machine_ip}/g" `grep registry.tars.com -rl ./
 sed -i "s/web.tars.com/${your_machine_ip}/g" `grep web.tars.com -rl ./*`
 ```
 
-然后在/usr/local/app/tars/目录下，执行脚本，启动tars框架服务。
+然后在`/usr/local/app/tars/`目录下，执行脚本，启动tars框架服务。
 
 ```$xslt
 chmod u+x tars_install.sh
@@ -199,7 +199,7 @@ tarspatch/util/init.sh
 git clone https://github.com/TarsCloud/TarsWeb
 ```
 
-修改源码中的配置文件，将配置文件中的ip地址改成本机内网ip地址
+修改源码中的配置文件，将配置文件中的ip地址改成本机内网ip地址。
 
 ```$xslt
 cd {$web_source_folder}
@@ -207,7 +207,7 @@ sed -i 's/db.tars.com/${your_machine_ip}/g' config/webConf.js
 sed -i 's/registry.tars.com/${your_machine_ip}/g' config/tars.conf
 ```
 
-安装web管理页面依赖，启动web
+安装web管理页面依赖，启动web。
 
 ```$xslt
 cd {$web_source_folder}
@@ -215,7 +215,7 @@ npm install --registry=https://registry.npm.taobao.org
 npm run prd
 ```
 
-创建日志目录
+创建日志目录。
 
 ```$xslt
 mkdir -p /data/log/tars
@@ -229,13 +229,13 @@ mkdir -p /data/log/tars
 
 **平台部署的端口号仅供参考，保证端口无冲突即可**
 
-在安装核心基础服务是，普通基础服务的部署信息已经初始化化了，因此此处只要进行发布即可，以下以tarsstat为例进行操作说明。
+在安装核心基础服务时，普通基础服务的部署信息已经初始化了，因此此处只要进行发布即可，以下以tarsstat为例进行操作说明。
 
-点击运维管理 => 服务部署
+点击`运维管理` => `服务部署`
 
 ![alt_text](https://github.com/TarsCloud/Tars/raw/master/docs/images/tars_tarsstat_bushu.png)
 
-点击服务管理 => 选中一个服务 => 发布管理，上传发布包，即6.2中生成的基础发布包，点击发布即可。
+点击`服务管理` => 选中一个服务 => `发布管理`，上传发布包，即6.2中生成的基础发布包，点击发布即可。
 
 ![alt_text](https://github.com/TarsCloud/Tars/raw/master/docs/images/tars_tarsnotify_patch.png)
 
@@ -245,15 +245,17 @@ mkdir -p /data/log/tars
 
 **注意tarsquerystat、tarsqueryproperty的协议选择非TARS，其他选择为TARS。**
 
-
 ## 附录
 * 安装前请先按照此页面介绍准备好软件https://github.com/TarsCloud/Tars/tree/master/build
-* 建议先阅读下文件内容 https://github.com/TarsCloud/Tars/blob/master/build/install.sh 
+* 建议先阅读下文内容 https://github.com/TarsCloud/Tars/blob/master/build/install.sh 
     （因实际上有些软件依赖在某些脚本中会自动安装，避免重复劳动，熟悉大致的脚本安装过程）
-* 参考前两部分内容，接下来按照安装说明进行安装 https://github.com/TarsCloud/Tars/blob/master/Install.zh.md 
+* 参考前两部分内容，接下来按照安装说明进行安装 https://github.com/TarsCloud/Tars/blob/master/Install.zh.md
 * 安装中遇到的常见问题和注意事项，可阅读 https://github.com/TarsCloud/Tars/blob/master/Install_faq.zh.md
+(试了下，上面4个页面都404了)
 * 安装教学视频 https://www.bilibili.com/video/av47290510/ 
-    
+
 # 快速安装
+
 * [使用docker](./docker.md)
+
 
