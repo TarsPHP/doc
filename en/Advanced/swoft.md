@@ -1,10 +1,10 @@
 
-# 简介
-让swoft框架欢快的跑在tars里面
-* 支持打包发布
-* 支持服务存活上报（服务注册）
+# Introduction
+swoft in tars
+* Support Packing code
+* Support tars register
 
-# 相关项目
+# Related
 
 * SwoftInTars (https://github.com/dpp2009/swoftInTars)
 * SWOFT (https://github.com/swoft-cloud/swoft)   
@@ -12,17 +12,18 @@
 * TARSPHP DOCKER (https://github.com/tangramor/docker-tars)
 
 
-# 使用
+# Use
 
-* Clone 项目 (https://github.com/dpp2009/swoftInTars)
-* 安装依赖 `composer install`
-* 打包 `composer run-script deploy`
-* 将打包完成的文件上传tars平台
+* Clone (https://github.com/dpp2009/swoftInTars)
+* Install `composer install`
+* Packing `composer run-script deploy`
+* Upload tars tgz to tars web
 
-# 配置说明
+# Configuration description
 
-* 服务名需要在 ./tars/tars.proto.php （appName&serverName） 和 ./src/.env （PNAME） 里面正确配置
-* swoft的端口号不使用tars平台下发的端口号（因为swoft可以支持多端口多协议）
+* server name write correct in ./tars/tars.proto.php （appName&serverName） & ./src/.env （PNAME） 
+* swoft's prot do not use tarsweb's port
 
-# 重启问题
-* 使用docker-tars，pcre可能没开启。运行php --ri swoole，看是否存在pcre => enabled。不存在运行yum install pcre-devel，再重新编译swoole！！
+
+# resta
+* use docker-tars，pcre may not open。run php --ri swoole，check pcre => enabled。(If pcre not open,run yum install pcre-devel，rebuild swoole)

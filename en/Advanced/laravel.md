@@ -1,17 +1,17 @@
-# 简介
-Laravel集成微服务治理框架Tars
-* 支持服务打包
-* 支持Laravel/Lumen原生开发
-* 支持TarsConfig
-* 支持TarsLog
-* 支持网关注册下线
-* 支持请求开始(laravel.tars.requesting)、请求结束(laravel.tars.requested)事件
-* 支持echo输出内容
-* 支持http和tars协议
-* 支持zipkin分布式追踪(已移除，可以使用[laravel-zipkin扩展包](https://github.com/luoxiaojun1992/laravel-zipkin))
-* 受限于框架本身的设计，不支持协程
+# Introduction
+Laravel in Tars with ci
+* Support Packing code
+* Support Laravel/Lumen develop
+* Support TarsConfig
+* Support TarsLog
+* Support tars register
+* Support Request start(laravel.tars.requesting)、Request end(laravel.tars.requested) event
+* Support echo content
+* Support http & tars Protocol
+* Support zipkin (Removed，can use[laravel-zipkin](https://github.com/luoxiaojun1992/laravel-zipkin))
+* Limited by the design of the framework itself, it does not support cooperation
 
-# 相关项目
+# Related 
 * LaravelTars (https://github.com/luoxiaojun1992/laravel-tars)
 * LaravelTarsDemo (https://github.com/luoxiaojun1992/laravel-tars-demo)
 * LumenTarsDemo (https://github.com/luoxiaojun1992/lumen-tars-demo)
@@ -20,20 +20,20 @@ Laravel集成微服务治理框架Tars
 * TARSPHP (https://github.com/TarsPHP)
 * TARSPHP DOCKER (https://github.com/tangramor/docker-tars)
 
-# 使用
-1. 创建项目
+# Use
+1. Create project
 
-   创建Tars项目目录结构(scripts、src、tars)，Laravel/Lumen项目放在src目录下
+   Create the tars project directory structure (scripts、src、tars)，put Laravel/Lumen project in src directory.
 
-2. 安装Laravel Tars包
+2. Install Laravel Tars
 
-   更新Composer依赖
+   Update Composer 
 
    ```shell
    composer require "luoxiaojun1992/laravel-tars:*"
    ```
 
-   或添加 requirement 到 composer.json
+   or add requirement to composer.json
 
    ```json
    {
@@ -43,42 +43,42 @@ Laravel集成微服务治理框架Tars
    }
    ```
 
-   添加ServiceProvider，编辑src/bootstrap/app.php
+   add ServiceProvider，edit src/bootstrap/app.php
    
    ```php
    $app->register(\Lxj\Laravel\Tars\ServiceProvider::class);
    ```
    
-   初始化Laravel Tars
+   Initialization Laravel Tars
 
    ```
    php artisan vendor:publish --tag=tars
    ```
 
-3. 修改配置文件src/config/tars.php文件proto字段，替换appName、serverName、objName
+3. edit `proto` in src/config/tars.php ，change `appName、serverName、objName`
 
-4. 如果使用http协议，且需要自动注册到网关(目前仅支持Kong)，修改配置文件src/config/tars.php
+4. If you use the HTTP protocol, you need to automatically register to the gateway (now only support Kong)，edit src/config/tars.php
 
    ```php
    'registries' => [
         [
             'type' => 'kong',
-            'url' => 'http://kong:8001/upstreams/tars_mysql8/targets', //根据实际情况填写
+            'url' => 'http://kong:8001/upstreams/tars_mysql8/targets', //Fill in according to the actual situation
         ]
    ]
    ```
 
-5. 配置中心(TarsConfig)或者日志服务(TarsLog)
+5. TarsConfig & TarsLog
 
-   服务启动时会自动拉取配置，如果需要记录日志，可以使用类似```Log::info('test log');```
+   The configuration will be pulled automatically when the service starts，If you need to log，can use ```Log::info('test log');```
    
-   如果需要指定TarsLog记录的最低日志级别，修改配置文件src/config/tars.php
+   If you need to specify the minimum log level for Tarslog logging，edit src/config/tars.php
    
    ```php
    'log_level' => \Monolog\Logger::INFO
    ```
 
-6. 如果使用http协议，按框架原生方式编写代码
+6. If you use the HTTP protocol, code in a framework native way
 
    ```php
     $router->get('/test', function () {
@@ -87,32 +87,33 @@ Laravel集成微服务治理框架Tars
     });
    ```
 
-7. 如果使用tars协议
+7. If you use the tasrsprotocol
 
-   在tars目录下编写tars接口描述文件，修改配置文件src/config/tars文件proto字段，新增tarsFiles
+   Write the tars interface description file in the tars directory，edit proto in src/config/tars，add tarsFiles
 
-   在scripts目录执行编译脚本生成接口代码
+   Executing compilation script in scripts directory to generate interface code
 
    ```shell
    /bin/bash tars2php.sh
    ```
 
-   在src/app/Tars/impl目录下创建接口实现类，编写业务逻辑代码
+   Create interface implementation class in src/app/Tars/impl directory and write business logic code
 
-   修改src/config/tars.php文件services字段，替换接口和接口实现命名空间
+   Edit services in src/config/tars.php，replace interface and interface implementation namespace
 
-8. 搭建Tars-PHP开发环境
 
-   如果使用http协议，请参考[TARS-PHP-HTTP服务端与客户端开发](https://tangramor.gitlab.io/tars-docker-guide/3.TARS-PHP-HTTP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/)
+8. Setting up the development environment of TarsPHP
 
-   如果使用tars协议，请参考[TARS-PHP-TCP服务端与客户端开发](https://tangramor.gitlab.io/tars-docker-guide/2.TARS-PHP-TCP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/)
+   If using the HTTP protocol, refer to[TARS-PHP-HTTP Server and client development](https://tangramor.gitlab.io/tars-docker-guide/3.TARS-PHP-HTTP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/)
 
-9. 在Tars-PHP开发环境下打包项目(在src目录下执行```php artisan tars:deploy```)
+   If using the tars protocol, refer to[TARS-PHP-TCP Server and client development](https://tangramor.gitlab.io/tars-docker-guide/2.TARS-PHP-TCP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/)
 
-10. 在Tars管理后台发布项目，请参考[TARS-PHP-TCP服务端与客户端开发](https://tangramor.gitlab.io/tars-docker-guide/2.TARS-PHP-TCP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/))，测试```curl 'http://{ip}:{port}/{api_route}'```
+9. Package the project in the tars PHP development environment(run ```php artisan tars:deploy``` in src)
 
-# 持续集成
-Jenkins Pipeline 配置示例(根据实际情况修改)
+10. Publish the project in the tars management background, please refer to [TARS-PHP-TCP Server and client development](https://tangramor.gitlab.io/tars-docker-guide/2.TARS-PHP-TCP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/))，测试```curl 'http://{ip}:{port}/{api_route}'```
+
+# Continuous integration
+Jenkins Pipeline Configuration example (modified according to actual situation)
 
 Laravel:
 ```
@@ -123,8 +124,8 @@ pipeline {
         }
     }
     parameters {
-        string(defaultValue: 'upload_from_jenkins', name: 'TAG_DESC', description: '发布版本描述' )
-        string(defaultValue: 'master', name: 'BRANCH_NAME', description: 'git分支，如：develop,master  默认: master')
+        string(defaultValue: 'upload_from_jenkins', name: 'TAG_DESC', description: 'description' )
+        string(defaultValue: 'master', name: 'BRANCH_NAME', description: 'git brunch，such as：develop,master  default: master')
     }
     environment {
         def JENKINS_HOME = "/root/jenkins"
@@ -133,7 +134,7 @@ pipeline {
         def SERVER_NAME = "LaravelTars"
     }
     stages {
-        stage('代码拉取与编译'){
+        stage('codePull'){
             steps {
                 echo "checkout from git"
                 git credentialsId:'2', url: 'https://gitee.com/lb002/laravel-tars-demo', branch: "${env.BRANCH_NAME}"
@@ -149,34 +150,34 @@ pipeline {
                 }
             }
         }
-        stage('单元测试') {
+        stage('unitTest') {
             steps {
                 script {
                     dir("$PROJECT_ROOT/src") {
-                        echo "phpunit 测试"
+                        echo "phpunit test"
                         sh "vendor/bin/phpunit tests/"
-                        echo "valgrind 测试"
+                        echo "valgrind test"
                     }
                 }
             }
         }
-        stage('覆盖率测试') {
+        stage('coverageTest') {
             steps {
-                echo "LCOV 覆盖率测试"
+                echo "LCOV coverageTest"
             }
         }
-        stage('打包与发布') {
+        stage('Compiling and publishing') {
             steps {
                 script {
                     dir("$PROJECT_ROOT/src") {
-                        echo "打包"
+                        echo "deploy"
                         sh "php artisan tars:deploy"
-                        echo "发布"
+                        echo "publishing"
                         sh "ls *.tar.gz > tmp.log"
-                        echo "上传build包"
+                        echo "upload build tgz"
                         def packageDeploy = sh(script: "head -n 1 tmp.log", returnStdout: true).trim()
                         sh "curl -H 'Host:172.18.0.3:3000' -F 'suse=@./${packageDeploy}' -F 'application=${APP_NAME}' -F 'module_name=${SERVER_NAME}' -F 'comment=${env.TAG_DESC}' http://172.18.0.3:3000/pages/server/api/upload_patch_package > curl.log"
-                        echo "发布build包"
+                        echo "package build tagz"
                         def packageVer = sh(script: "jq '.data.id' curl.log", returnStdout: true).trim()
                         def postJson = '{"serial":true,"items":[{"server_id":"34","command":"patch_tars","parameters":{"patch_id":' + packageVer + ',"bak_flag":false,"update_text":"${env.TAG_DESC}"}}]}'
                         echo postJson
@@ -189,7 +190,7 @@ pipeline {
     post {
         success {
             emailext (
-                subject: "[jenkins]构建通知：${env.JOB_NAME} 分支: ${env.BRANCH_NAME} - Build# ${env.BUILD_NUMBER} 成功  !",
+                subject: "[jenkins]Construction notice：${env.JOB_NAME} brunch: ${env.BRANCH_NAME} - Build# ${env.BUILD_NUMBER} success  !",
                 body: '${SCRIPT, template="groovy-html.template"}',
                 mimeType: 'text/html',
                 to: "luoxiaojun1992@sina.cn",
@@ -198,7 +199,7 @@ pipeline {
         }
         failure {
             emailext (
-                subject: "[jenkins]构建通知：${env.JOB_NAME} 分支: ${env.BRANCH_NAME} - Build# ${env.BUILD_NUMBER} 失败 !",
+                subject: "[jenkins]Construction notice：${env.JOB_NAME} brunch: ${env.BRANCH_NAME} - Build# ${env.BUILD_NUMBER} fail !",
                 body: '${SCRIPT, template="groovy-html.template"}',
                 mimeType: 'text/html',
                 to: "luoxiaojun1992@sina.cn",
@@ -218,8 +219,8 @@ pipeline {
         }
     }
     parameters {
-        string(defaultValue: 'upload_from_jenkins', name: 'TAG_DESC', description: '发布版本描述' )
-        string(defaultValue: 'master', name: 'BRANCH_NAME', description: 'git分支，如：develop,master  默认: master')
+        string(defaultValue: 'upload_from_jenkins', name: 'TAG_DESC', description: 'description' )
+        string(defaultValue: 'master', name: 'BRANCH_NAME', description: 'gitbrunch，such as：develop,master  default: master')
     }
     environment {
         def JENKINS_HOME = "/root/jenkins"
@@ -228,7 +229,7 @@ pipeline {
         def SERVER_NAME = "LumenTars"
     }
     stages {
-        stage('代码拉取与编译'){
+        stage('codePull'){
             steps {
                 echo "checkout from git"
                 git credentialsId:'2', url: 'https://gitee.com/lb002/lumen-tars-demo', branch: "${env.BRANCH_NAME}"
@@ -242,34 +243,34 @@ pipeline {
                 }
             }
         }
-        stage('单元测试') {
+        stage('unitTest') {
             steps {
                 script {
                     dir("$PROJECT_ROOT/src") {
-                        echo "phpunit 测试"
+                        echo "phpunit test"
                         sh "vendor/bin/phpunit tests/"
-                        echo "valgrind 测试"
+                        echo "valgrind test"
                     }
                 }
             }
         }
-        stage('覆盖率测试') {
+        stage('coverageTest') {
             steps {
-                echo "LCOV 覆盖率测试"
+                echo "LCOV coverageTest"
             }
         }
-        stage('打包与发布') {
+        stage('Compiling and publishing') {
             steps {
                 script {
                     dir("$PROJECT_ROOT/src") {
-                        echo "打包"
+                        echo "deploy"
                         sh "php artisan tars:deploy"
-                        echo "发布"
+                        echo "publishing"
                         sh "ls *.tar.gz > tmp.log"
-                        echo "上传build包"
+                        echo "upload build tgz"
                         def packageDeploy = sh(script: "head -n 1 tmp.log", returnStdout: true).trim()
                         sh "curl -H 'Host:172.18.0.3:3000' -F 'suse=@./${packageDeploy}' -F 'application=${APP_NAME}' -F 'module_name=${SERVER_NAME}' -F 'comment=${env.TAG_DESC}' http://172.18.0.3:3000/pages/server/api/upload_patch_package > curl.log"
-                        echo "发布build包"
+                        echo "package build tagz"
                         def packageVer = sh(script: "jq '.data.id' curl.log", returnStdout: true).trim()
                         def postJson = '{"serial":true,"items":[{"server_id":"33","command":"patch_tars","parameters":{"patch_id":' + packageVer + ',"bak_flag":false,"update_text":"${env.TAG_DESC}"}}]}'
                         echo postJson
@@ -282,7 +283,7 @@ pipeline {
     post {
         success {
             emailext (
-                subject: "[jenkins]构建通知：${env.JOB_NAME} 分支: ${env.BRANCH_NAME} - Build# ${env.BUILD_NUMBER} 成功  !",
+                subject: "[jenkins]Construction notice：${env.JOB_NAME} brunch: ${env.BRANCH_NAME} - Build# ${env.BUILD_NUMBER} success  !",
                 body: '${SCRIPT, template="groovy-html.template"}',
                 mimeType: 'text/html',
                 to: "luoxiaojun1992@sina.cn",
@@ -291,7 +292,7 @@ pipeline {
         }
         failure {
             emailext (
-                subject: "[jenkins]构建通知：${env.JOB_NAME} 分支: ${env.BRANCH_NAME} - Build# ${env.BUILD_NUMBER} 失败 !",
+                subject: "[jenkins]Construction notice：${env.JOB_NAME} brunch: ${env.BRANCH_NAME} - Build# ${env.BUILD_NUMBER} fail !",
                 body: '${SCRIPT, template="groovy-html.template"}',
                 mimeType: 'text/html',
                 to: "luoxiaojun1992@sina.cn",

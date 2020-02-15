@@ -1,21 +1,24 @@
-# 持续集成方案
-由于Tars的web管理界面暂时未支持集成git/svn，每次发布需要上传zip包极为不方便，这里给出一个基于`jenkins`的持续集成方案方便大家参考。具体业务中可能需要根据实际情况进行调整。
+# Continuous integration solution
+Tars web not yet direct supported git/svn, need upload zip file every time，Here is a continuous integration scheme based on 'Jenkins' for your reference.
+Specific business may need to be adjusted according to the actual situation.
 
-# 操作步骤
-> 这里使用 `jenkins` 的pipeline 构建持续集成环境，通过调用tars web管理界面的http接口实现持续集成。下面将以 [github examples](https://github.com/TarsPHP/TarsPHP/tree/master/examples)中的 `QD.ActHttpServer`为例。
+# Steps
+> Here we use the pipeline of 'Jenkins' to build a continuous integration environment(use tars web http api).
+Take 'QD. Acthttpserver' as an example from [github examples](https://github.com/TarsPHP/TarsPHP/tree/master/examples)
 
-1. 新建一个构建节点如**phpenv**，节点可以使docker，包含：
-    - `php` 可能会需要多php版本，看具体业务
+1. Create a new build node **phpenv**，node can use docker，contain：
+    - `php` 
     - `composer`
-    - `jq` Linux下json的命令行工具，方便解析http接口返回的json
-    - `phpunit` 非必须
-    - `valgrind` 非必须
-2. 安装以下`plugin`
+    - `jq` The command line tool of JSON under Linux is convenient for parsing JSON returned from HTTP interface
+    - `phpunit` non essential
+    - `valgrind` non essential
+                 
+2. Install the following `plugin`
     - Valgrind Plug-in
     - Pipeline
     - Workspace Cleanup Plugin
-3. 新建一个pipeline job: **QD.ActHttpServer**
-3. 在 **Pipeline** 中定义如下 script：
+3. Create a new pipeline job: **QD.ActHttpServer**
+3. **Pipeline**  script：
     ```
          pipeline {
                     agent {
@@ -24,8 +27,8 @@
                         }
                     }
                     parameters { 
-                        string(defaultValue: 'upload_from_jenkins', name: 'TAG_DESC', description: '发布版本描述' )
-                        string(defaultValue: 'master', name: 'BRANCH_NAME', description: 'git分支，如：develop,master  默认: master')
+                        string(defaultValue: 'upload_from_jenkins', name: 'TAG_DESC', description: 'Release description' )
+                        string(defaultValue: 'master', name: 'BRANCH_NAME', description: 'git branch，such as：develop,master  default: master')
                     }
                     environment {
                         def JENKINS_HOME = "/home/jenkins"
@@ -34,28 +37,28 @@
                         def SERVER_NAME = "ActHttpServer"
                     }
                     stages {
-                        stage('代码拉取'){
+                        stage('codePull'){
                             steps {
                                 echo "checkout from git"
                                 git credentialsId:'2', url: 'https://github.com/TarsPHP/TarsPHP', branch: "${env.BRANCH_NAME}"
                             }
                         }
-                        stage('单元测试') {
+                        stage('unitTest') {
                             steps {
-                                echo "phpunit 测试"
-                                echo "valgrind 测试"
+                                echo "phpunit test"
+                                echo "valgrind test"
                             }
                         }
-                        stage('覆盖率测试') {
+                        stage('coverageTest') {
                             steps {
-                                echo "LCOV 覆盖率测试"
+                                echo "LCOV Coverage test"
                             }
                         }
-                        stage('编译与发布') {
+                        stage('Compiling and publishing') {
                             steps {
                                 script {
                                     dir("$PROJECT_ROOT/examples/TarsActDemo/QD.ActHttpServer/src") {
-                                        echo "QD.ActHttpServer 编译与发布"
+                                        echo "QD.ActHttpServer Compiling and publishing"
                                         sh "composer install -vvv"
                                         sh "composer run-script deploy"
                                         sh "ls *.tar.gz > tmp.log"
@@ -73,7 +76,7 @@
                     post {
                         success {
                             emailext (
-                                subject: "[jenkins]构建通知：${env.JOB_NAME} 分支: ${env.BRANCH_NAME} - Build# ${env.BUILD_NUMBER} 成功  !",
+                                subject: "[jenkins] Construction notice：${env.JOB_NAME} brunch: ${env.BRANCH_NAME} - Build# ${env.BUILD_NUMBER} success  !",
                                 body: '${SCRIPT, template="groovy-html.template"}',
                                 mimeType: 'text/html',
                                 to: "liujingfeng.a@yuewen.com",
@@ -82,7 +85,7 @@
                         }
                         failure {
                             emailext (
-                                subject: "[jenkins]构建通知：${env.JOB_NAME} 分支: ${env.BRANCH_NAME} - Build# ${env.BUILD_NUMBER} 失败 !",
+                                subject: "[jenkins] Construction notice：${env.JOB_NAME} brunch: ${env.BRANCH_NAME} - Build# ${env.BUILD_NUMBER} fail !",
                                 body: '${SCRIPT, template="groovy-html.template"}',
                                 mimeType: 'text/html',
                                 to: "liujingfeng.a@yuewen.com",
@@ -92,9 +95,9 @@
                     }
                 }
     ```
-4. 执行构建
+4. Execution Construction
     ![PNG](../image/build_with_parameters.png)
-5. 查看构建结果（邮件通知）
+5. View build results (mail notification)
     ![PNG](../image/stage_view.png)
-5. 查看tars web管理界面
+5. tars web
     ![PNG](../image/tars_web.png)

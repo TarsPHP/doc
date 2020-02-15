@@ -1,36 +1,36 @@
-# 简介
-Yii2集成微服务治理框架Tars
-* 支持服务打包
-* 支持Yii2原生开发
-* 支持TarsConfig
-* 支持TarsLog
-* 支持网关注册下线
-* 支持请求开始(tarsRequesting)、请求结束(tarsRequested)事件
-* 支持echo输出内容
-* 支持http和tars协议
-* 受限于框架本身的设计，不支持协程
+# Introduction
+Yii2 in Tars
+* Support Packing code
+* Support Yii2 develop
+* Support TarsConfig
+* Support TarsLog
+* Support tars register
+* Support Request start(tarsRequesting)、Request end(tarsRequested) event
+* Support echo content
+* Support http & tars Protocol
+* Limited by the design of the framework itself, it does not support cooperation
 
-# 相关项目
+# Related
 * Yii2Tars (https://github.com/luoxiaojun1992/yii2-tars)
 * Yii2TarsDemo (https://github.com/luoxiaojun1992/yii2-tars-demo)
 * Yii2 (https://github.com/yiisoft/yii2)
 * TARSPHP (https://github.com/TarsPHP)
 * TARSPHP DOCKER (https://github.com/tangramor/docker-tars)
 
-# 使用
-1. 创建项目
+# Use
+1. Create project
 
-   创建Tars项目目录结构(scripts、src、tars)，Yii2项目放在src目录下
+   Create the tars project directory structure(scripts、src、tars)，put Yii2 project in src directory
 
-2. 安装Yii2 Tars包
+2. Install Yii2 Tars
 
-   更新Composer依赖
+   Update Composer 
 
    ```shell
    composer require "luoxiaojun1992/yii2-tars:*"
    ```
 
-   或添加 requirement 到 composer.json
+   or add requirement to composer.json
 
    ```json
    {
@@ -40,69 +40,70 @@ Yii2集成微服务治理框架Tars
    }
    ```
    
-   初始化Yii2 Tars
+   Initialization Yii2 Tars
 
    ```
    ./yii tars/publish
    ```
 
-3. 修改配置文件src/config/params.php文件tars字段下的proto字段，替换appName、serverName、objName
+3. Edit `proto` in src/config/params.php ，change `appName、serverName、objName`
 
-4. 如果使用http协议，且需要自动注册到网关(目前仅支持Kong)，修改配置文件src/config/params.php文件tars字段
+4. If you use the HTTP protocol, you need to automatically register to the gateway (now only support Kong)，edit src/config/params.php
 
    ```php
    'registries' => [
         [
             'type' => 'kong',
-            'url' => 'http://kong:8001/upstreams/tars_mysql8/targets', //根据实际情况填写
+            'url' => 'http://kong:8001/upstreams/tars_mysql8/targets', //Fill in according to the actual situation
         ]
    ]
    ```
 
-5. 配置中心(TarsConfig)或者日志服务(TarsLog)，修改配置文件src/config/params.php文件tars字段
+5. TarsConfig & TarsLog，edit `tars` in src/config/params.php
 
-   服务启动时会自动拉取配置，如果需要记录日志，可以使用类似```Yii::info('test log');```
+   The configuration will be pulled automatically when the service starts，If you need to log，can use ```Yii::info('test log');```
    
-   如果需要指定TarsLog记录的最低日志级别，修改配置文件src/config/params.php文件tars字段
+   If you need to specify the minimum log level for Tarslog logging，edit src/config/params.php
    
    ```php
    'log_level' => ['info']
    ```
 
-   如果需要指定TarsLog的记录频率，修改配置文件src/config/params.php文件tars字段
+   If you need to specify the recording frequency of tarslog，edit `tars` in src/config/params.php
 
    ```php
    'log_interval' => 1000
    ```
 
-6. 如果使用http协议，按框架原生方式编写代码，路由没有特殊要求
+6. If you use HTTP protocol and write code in the framework native way, there is no special requirement for routing
 
-7. 如果使用tars协议
+7. If you use the tasrsprotocol
 
-   在tars目录下编写tars接口描述文件，修改配置文件src/config/params.php文件tars字段下的proto字段，新增tarsFiles
+   Write the tars interface description file in the tars directory，edit proto in src/config/params.php,add tarsFiles
 
-   在scripts目录执行编译脚本生成接口代码
+   Executing compilation script in scripts directory to generate interface code
 
    ```shell
    /bin/bash tars2php.sh
    ```
 
-   在src/tars/impl目录下创建接口实现类，编写业务逻辑代码
+   Create interface implementation class in src/app/Tars/impl directory and write business logic code
 
-   修改src/config/params.php文件tars字段下的services字段，替换接口和接口实现命名空间
+   Edit services in src/config/params.php，replace interface and interface implementation namespace
 
-8. 搭建Tars-PHP开发环境
 
-   如果使用http协议，请参考[TARS-PHP-HTTP服务端与客户端开发](https://tangramor.gitlab.io/tars-docker-guide/3.TARS-PHP-HTTP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/)
+8. Setting up the development environment of TarsPHP
 
-   如果使用tars协议，请参考[TARS-PHP-TCP服务端与客户端开发](https://tangramor.gitlab.io/tars-docker-guide/2.TARS-PHP-TCP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/)
+   If using the HTTP protocol, refer to[TARS-PHP-HTTP Server and client development](https://tangramor.gitlab.io/tars-docker-guide/3.TARS-PHP-HTTP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/)
 
-9. 在Tars-PHP开发环境下打包项目(在src目录下执行```./yii tars/deploy```)
+   If using the tars protocol, refer to[TARS-PHP-TCP Server and client development](https://tangramor.gitlab.io/tars-docker-guide/2.TARS-PHP-TCP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/)
 
-10. 在Tars管理后台发布项目，请参考[TARS-PHP-TCP服务端与客户端开发](https://tangramor.gitlab.io/tars-docker-guide/2.TARS-PHP-TCP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/))，测试```curl 'http://{ip}:{port}/{api_route}'```
+9. Package the project in the tars PHP development environment(run ```./yii tars/deploy``` in src)
 
-# 持续集成
-Jenkins Pipeline 配置示例(根据实际情况修改)
+10. Publish the project in the tars management background, please refer to [TARS-PHP-TCP Server and client development](https://tangramor.gitlab.io/tars-docker-guide/2.TARS-PHP-TCP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/))，测试```curl 'http://{ip}:{port}/{api_route}'```
+
+# Continuous integration
+Jenkins Pipeline Configuration example (modified according to actual situation)
 ```
 pipeline {
     agent {
@@ -111,8 +112,8 @@ pipeline {
         }
     }
     parameters { 
-        string(defaultValue: 'upload_from_jenkins', name: 'TAG_DESC', description: '发布版本描述' )
-        string(defaultValue: 'master', name: 'BRANCH_NAME', description: 'git分支，如：develop,master  默认: master')
+        string(defaultValue: 'upload_from_jenkins', name: 'TAG_DESC', description: 'description' )
+        string(defaultValue: 'master', name: 'BRANCH_NAME', description: 'git brunch，such as：develop,master  default: master')
     }
     environment {
         def JENKINS_HOME = "/root/jenkins"
@@ -121,7 +122,7 @@ pipeline {
         def SERVER_NAME = "Yii2Tars"
     }
     stages {
-        stage('代码拉取与编译'){
+        stage('codePull'){
             steps {
                 echo "checkout from git"
                 git credentialsId:'2', url: 'https://gitee.com/lb002/yii2-tars-demo', branch: "${env.BRANCH_NAME}"
@@ -134,34 +135,34 @@ pipeline {
                 }
             }
         }
-        stage('单元测试') {
+        stage('unitTest') {
             steps {
                 script {
                     dir("$PROJECT_ROOT/src") {
-                        echo "phpunit 测试"
+                        echo "phpunit test"
                         //sh "vendor/bin/phpunit tests/"
-                        echo "valgrind 测试"
+                        echo "valgrind test"
                     }
                 }
             }
         }
-        stage('覆盖率测试') {
+        stage('coverageTest') {
             steps {
-                echo "LCOV 覆盖率测试"
+                echo "LCOV coverageTest"
             }
         }
-        stage('打包与发布') {
+        stage('Compiling and publishing') {
             steps {
                 script {
                     dir("$PROJECT_ROOT/src") {
-                        echo "打包"
+                        echo "deploy"
                         sh "./yii tars/deploy"
-                        echo "发布"
+                        echo "publishing"
                         sh "ls *.tar.gz > tmp.log"
-                        echo "上传build包"
+                        echo "upload build tgz"
                         def packageDeploy = sh(script: "head -n 1 tmp.log", returnStdout: true).trim()
                         sh "curl -H 'Host:172.18.0.3:3000' -F 'suse=@./${packageDeploy}' -F 'application=${APP_NAME}' -F 'module_name=${SERVER_NAME}' -F 'comment=${env.TAG_DESC}' http://172.18.0.3:3000/pages/server/api/upload_patch_package > curl.log"
-                        echo "发布build包"
+                        echo "package build tagz"
                         def packageVer = sh(script: "jq '.data.id' curl.log", returnStdout: true).trim()
                         def postJson = '{"serial":true,"items":[{"server_id":"35","command":"patch_tars","parameters":{"patch_id":' + packageVer + ',"bak_flag":false,"update_text":"${env.TAG_DESC}"}}]}'
                         echo postJson
@@ -174,7 +175,7 @@ pipeline {
     post {
         success {
             emailext (
-                subject: "[jenkins]构建通知：${env.JOB_NAME} 分支: ${env.BRANCH_NAME} - Build# ${env.BUILD_NUMBER} 成功  !",
+                subject: "[jenkins]Construction notice：${env.JOB_NAME} brunch: ${env.BRANCH_NAME} - Build# ${env.BUILD_NUMBER} success  !",
                 body: '${SCRIPT, template="groovy-html.template"}',
                 mimeType: 'text/html',
                 to: "luoxiaojun1992@sina.cn",
@@ -183,7 +184,7 @@ pipeline {
         }
         failure {
             emailext (
-                subject: "[jenkins]构建通知：${env.JOB_NAME} 分支: ${env.BRANCH_NAME} - Build# ${env.BUILD_NUMBER} 失败 !",
+                subject: "[jenkins]Construction notice：${env.JOB_NAME} brunch: ${env.BRANCH_NAME} - Build# ${env.BUILD_NUMBER} fail** !",
                 body: '${SCRIPT, template="groovy-html.template"}',
                 mimeType: 'text/html',
                 to: "luoxiaojun1992@sina.cn",
