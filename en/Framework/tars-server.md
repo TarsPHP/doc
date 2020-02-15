@@ -1,101 +1,109 @@
-# tars-server说明文档
+# tars-server document
 
-## 简介
-tars-server是用php语言实现tars服务的基础框架包。主要包含服务启停、路由解析、协议处理、事件上报等。
+## Introduction
+**Tars-server** is a basic framework for implementing tars services in PHP. It mainly includes service start and stop, route analysis, protocol processing, and event reporting.
 
-## 如何使用  
-tars-server使用composer进行包管理,开发者只需要根据相应的版本,进行composer install即可。  
+## How to use  
+**Tars-server** uses *composer* for package management. Developers only need to perform `composer install` according to the corresponding version.
+
+For specific usage, please refer to *http-server*, *timer-server*, and *tcp-server* under [examples](https://github.com/TarsPHP/TarsPHP/tree/master/examples). 
+
+## Framework description
+**Tars-server** is implemented with **swoole** as the underlying network transceiver.The framework mainly includes the following directories:
+
+* cmd: Responsible for the implementation of the framework's start and stop commands  
+* core: Core implementation of the framework * protocol: responsible for protocol processing 
   
-具体的使用方式,请参考对应[examples](https://github.com/TarsPHP/TarsPHP/tree/master/examples)下面的http-server、timer-server和tcp-server。  
-  
-## 框架说明  
-TARS-SERVER是以`SWOOLE`为底层的网络收发实现的,框架主要包含如下的目录:  
-* cmd: 负责框架的启动和停止命令的实现,现在支持start、stop和restart命令  
-* core: 框架的核心实现 * protocol: 负责进行协议处理  
-  
-### cmd层  
-针对cmd层,现在包含如下几个文件:  
-1. `Command.php` 负责在服务启动的时候,指定配置文件和启动命令  
-2. `CommandBase.php` 规定了一个Command所必须的实现,所有的诸如START,都是CommandBase的子类。其中提供了getProcess方法,来获取当前启动的服务进程。  
-3. `Restart.php` 重启命令,只是调用停止后,再调用启动   
-4. `Start.php` 启动命令,会首先解析平台下发的配置,然后引入业务所必须的services.php文件。  
-接下来监测进程是否已经启动,从而避免重复启动;  
-最后将配置和预先定义的SwooleTable传入Server,进行服务的初始化和启动过程。  
-5. `Stop.php`  
-现在的服务停止方式比较暴力,会根据服务的名称拉出所有的进程,然后kill掉。后续会引入reload的方式进行服务的代码重新加载。  
-  
-  
-### core核心层  
-核心层主要由`Event`、`Server`、`Request`和`Response`组成。  
-  
+### cmd
+For the cmd part, contains the following files:
+1. `Command.php` 
+
+   Responsible for specifying the configuration file and startup command when the service starts
+
+2. `CommandBase.php` 
+
+   Specifies the required implementation of a Command. All such as *START* are subclasses of *CommandBase*. It provides the getProcess method to get the currently started service process.  
+
+3. `Restart.php` 
+
+   Restart command, just call stop and then call start
+
+4. `Start.php` 
+
+  Startup command will first analyze the configuration issued by the platform and then introduce the *services.php* file necessary for the business.  
+
+5. `Stop.php` 
+  The current service stop method is violent. It will pull out all processes according to the service name, and then kill it. Reloading will be introduced later to reload the service code.
+
+
+### core  
+The core layer is mainly composed of `Event`,` Server`, `Request`, and` Response`.  
+
 #### `Server.php`    
- 负责服务的启动前的初始化工作,包括:  
-   * 判断是tcp还是http类型,从而注册对应的回调,启动对应的server  
-   * 判断如果是timer,会启动对对应目录的timer扫描
-   * 将swoole的配置透传  
-   * 注册通用的回调函数  
-   * 传递server的swooletable  
-   * 指定整个框架的启动文件,并强制require  
-   * 指定框架的协议处理方式,是tars还是http
+ Responsible for the initialization work before the service starts, including:
+   * Determine if it is tcp or http, so register the corresponding callback and start the corresponding server
+   * If it is a timer, it will start the timer scan of the corresponding directory
+   * Pass the configuration of swoole 
+   * Register general callback function  
+   * Pass the server's *swooletable*  
+   * Specify the startup file for the entire framework and force require  
+   * Specify the protocol processing method of the framework, whether it is tars or http
 
-在完成服务的启动之后,会依次进入    
+After completing the startup of the service, you will enter    
 * onMasterStart
-    - 写入进程的名称  
-    - 将pid写入文件中  
-    - 进行服务的初始化上报  
+    - Write the name of the process 
+    - Write pid to file  
+    - Initial report of service  
 * onManagerStart
-    - 重命名进程  
+    - Rename process  
 * onWorkerStart  
-    - 如果是tcp类型,需要先将interface中的注释转化为php的数据,方便路由的时候处理  
-    - 如果是http的类型,需要指定对应的namespacename  
-    - 设置对应的worker的名称  
-    - 如果是timer,需要启动对应的timer  
-    - 在workerId=0的时候(保证只触发一次),将服务的保活上报任务投递到TASK里面  
+    - If it is tcp type, converting the comments in the interface to php data first, which is convenient for processing when routing.  
+    - If it is http, specify the corresponding namespace  
+    - Set the name of worker  
+    - If it is a timer, start the corresponding timer  
+    - When workerId = 0 (guaranteed to be triggered only once), submit the keepalive report task of the service to task worker
 * onTask
-    - 心跳上报
-    - 主调上报
-    - 特性上报  
+    - Heartbeat report
+    - Stat report
+    - Feature report  
 - onReceive/onRequest  
-    + 对于tcp的server,关注`onReceive`:  
-        * 初始化Request对象,将sw对象,传入超全局变量$_SERVER  
-        * 设置protocol为TARSProtocol  
-        * 进行协议处理,并回包  
-        * 清除全局变量
+    + For tcp server, follow `onReceive`
+        *  Initialize the Request object, pass the sw object into the super global variable **$ _SERVER**  
+        * Set protocol to TARSProtocol
+        * Perform protocol processing and return the package  
+        * Clear global variables
     
-    + 对于http的server,关注`onRequest`:  
-        * 处理cookie、get、post请参数  
-        * 初始化Request对象,将sw对象,传入超全局变量$_SERVER  
-        * 进行协议处理,并回包  
-        * 清除全局变量  
-  
-#### Event.php    
-onReceive方法:  
-   * tcp协议的请求,先会进入TARSProtocol的route方法,进行路由  
-   * 完成路由后,进行实际的函数调用  
-   * 打包回包  
-   * 发送回包  
+    + For http server, follow `onRequest`
+        * Handle parameters for cookies, get, and post  
+        * Initialize the Request object, pass the sw object into the super global variable **$ _SERVER**  
+        * Perform protocol processing and return the package  
+        * Clear global variables  
 
-onRequest方法:  
-   * 提供一个默认的探测接口  
-   * 进行基本的路由协议解析  
-   * 调用对应的controller方法  
-   * 发送回包  
-  
+#### Event.php    
+onReceive method:  
+   * TCP requests will first enter the route method of TARSProtocol for routing  
+   * After routing, make the actual function call  
+   * Pack back  
+   * Send back package  
+
+onRequest method:  
+   * Provide a default detection interface
+   * Perform basic routing protocol analysis 
+   * Call the corresponding controller method  
+   * Send back package  
+
 #### Request.php  
-- 储存一些必要的请求数据;  
-- 设置和去掉全局变量  
+- Store some necessary request data  
+- Set and remove global variables  
   
 #### Response.php  
-负责回包的一些工作  
-  
-  
-### 服务启动流程  
-整个服务启动由cmd下的Start发起,  
-之后调用Server对象的创建,  
-然后依次进行swoole的初始化工作,  
-完成启动服务之后,只需要处理onReceive或者onRequest的监听即可  
-  
-## 框架依赖  
-* phptars/tars-client: 进行tars服务的调用  
-* phptars/tars-report: 负责服务本身运行状态的上报  
-* phptars/tars-config: 负责对于平台上传的配置的拉取
+Responsible for send back package 
+
+
+### Service startup process  
+The service startup is initiated by Start cmd, After the creation of the Server object is called, Then perform the initialization of swoole in turn, After starting the service, you only need to handle the monitoring of onReceive or onRequest. 
+
+## dependency  
+* phptars/tars-client: Make a call to the tars service  
+* phptars/tars-report: Report the running status of the service itself  
+* phptars/tars-config: Pull the configuration uploaded by the platform

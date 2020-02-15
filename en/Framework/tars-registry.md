@@ -1,10 +1,11 @@
-# tars-registry说明文档
+# tars-registry documentation
 
-## 简介
-tars平台的tarsregistry服务提供服务发现的功能。  
-本模块为php提供主控寻址的能力(服务发现)。
+## Introduction
+The tarsregistry service of the tars platform provides a service discovery function.
+This module provides the main control addressing capability (service discovery) for php.
 
-## 使用说明
+## Instructions
+
 ```php
         //从tarsregistry服务寻找服务地址
         $wrapper = new \Tars\registry\QueryFWrapper("tars.tarsregistry.QueryObj@tcp -h 172.16.0.161 -p 17890",1,60000);
@@ -18,5 +19,6 @@ tars平台的tarsregistry服务提供服务发现的功能。
         var_dump($result);
 ```
 
-## 其他
-因为其他模块已经集成了本模块， __所以一般情况下，服务脚本无需显式使用此模块。__
+## Other
+
+Because other modules have integrated this module, __so in general, the service script does not need to use this module explicitly. __

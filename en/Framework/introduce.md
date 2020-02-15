@@ -1,69 +1,77 @@
-# TARSPHP Framework模块
+# TARSPHP Framework module
 
 ## tars-client
 
-tars-client中提供了对tars服务进行调用的php能力，包括：
+**Tars-client** provides PHP capabilities for calling the tars service, including:
 
-* 调用远程服务的实例；
-* 主调上报
-* 自动寻址模块
+* Invoke the remote service instance
+* Stat monitor report
+* Automatic routing module
 
-[详细说明](./tars-client.md)
+[Detailed description](./tars-client.md)
 
 ## tars-server
-tars-server提供了底层的server框架,同时支持如下特性
 
-* 基于swoole1.x/2.x的高性能服务
-* 支持tup协议和tars流两种协议模式
-* 支持http、tcp、timer三种server
-* 上报、监控、日志的集成
-* tars平台发布支持
+**Tars-server** provides the underlying server framework and supports the following features:
 
-[详细说明](./tars-server.md)
+- High performance service based on swoole1.x/2.x
+- Support two protocol modes: tup protocol and tars stream protocol
+- Support three kind servers: http, tcp and timer
+- Integration of reporting, monitoring and logging
+- Tars platform release support
 
-## tars-config 
+[Detailed description](./tars-server.md)
 
-从tars平台的配置服务拉取配置文件的能力模块。
+## tars-config
 
-[详细说明](./tars-config.md)
+Ability module to pull configuration files from the tars platform's configuration service.
 
-## tars-deploy 
+[Detailed description](./tars-config.md)
 
-进行tars-server业务代码打包的模块。
+## tars-deploy
 
-[详细说明](./tars-deploy.md)
+Module of packaging **tars-server** business code.
+
+[Detailed description](./tars-deploy.md)
 
 ## tars-extension
 
-tars底层依赖的php扩展代码
-[详细说明](./tars-extension.md)
- 
+Tars underlying php extension code.
+
+[Detailed description](./tars-extension.md)
+
 ## tars-log
 
-tars进行远程日志写入的模块
-[详细说明](./tars-log.md)
- 
+Module for remote log writing
+
+[Detailed description](./tars-log.md)
+
 ## tars-monitor
 
-tars进行主调上报和特性上报的功能模块
-[详细说明](./tars-monitor.md)
- 
+Function modules for stat monitor report and feature monitor report.
+
+[Detailed description](./tars-monitor.md)
+
 ## tars-registry
- 
-tars进行主控寻址的功能模块
-[详细说明](./tars-registry.md)
- 
+
+Function module for automatic routing.
+
+[Detailed description](./tars-registry.md)
+
 ## tars-report
- 
-tars进行keep-alive服务保活上报的模块
-[详细说明](./tars-report.md)
+
+Keepalive reporting module
+
+[Detailed description](./tars-report.md)
 
 ## tars-utils
- 
-tars进行配置文件解析的模块
-[详细说明](./tars-utils.md)
+
+Module for parsing configuration files.
+
+[Detailed description](./tars-utils.md)
 
 ## tars2php 
 
-代码自动生成的工具,可以自动生成server和client端的代码。
-[详细说明](./tars2php.md)
+Automatic code generation tool, can automatically generate server and client code.
+
+[Detailed description](./tars2php.md)

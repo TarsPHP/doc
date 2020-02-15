@@ -1,11 +1,12 @@
-# tars-report说明文档
+# tars-report documentation
 
-## 简介
-`tars-report` 是 `phptars` 心跳上报（保活）模块
-tarsphp框架在master进程启动的时候会上报服务存活状态(主进程存活&管理进程存活)。  
-在第一个worker进程启动的时候，会开启一个timer来定时上报存活状态。  
+## Introduction
+`tars-report` is the ` phptars` heartbeat report (keep alive) module
+The tarsphp framework will report the service alive status when the master process starts (main process alive & management process alive).
+When the first worker process is started, a timer will be started to periodically report the survival status.
 
-## 使用说明
+## Instructions
+
 ```php
         $serverInfo = new ServerInfo();
         $serverInfo->adapter = 'PHPTest.test.objAdapter';
@@ -24,5 +25,7 @@ tarsphp框架在master进程启动的时候会上报服务存活状态(主进程
         $serverF->keepAlive($adminServerInfo);//管理进程存活
 ```
 
-## 其他
-因为其他模块已经集成了本模块， __所以一般情况下，服务脚本无需显式使用此模块。__
+## Other
+
+Because other modules have integrated this module, __so in general, the service script does not need to use this module explicitly. __
+

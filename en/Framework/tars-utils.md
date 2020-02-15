@@ -1,23 +1,23 @@
-# tars-utils说明文档
+# tars-utils documentation
 
-## 简介
-`tars-utils` 是 phptars的辅助类库，主要提供如下几个功能：
-* 配置文件解析并缓存(swoole table)
-* 主控地址解析
-* node上报配置解析
+## Introduction
+`tars-utils` is an auxiliary library for phptars, which mainly provides the following functions:
+* Configuration file analysis and cache (swoole table)
+* Master address resolution
+* Node report configuration analysis
 
-## 使用说明
-### 配置文件解析
+## Instructions
+### Configuration file parsing
 
-以[QDPHP.TARSServer.config.conf]() 为例，将`conf` 文件解析成 数组形式
+Take [QDPHP.TARSServer.config.conf]() as an example, parse the `conf` file into an array
 
-### 地址解析
+### Geocoding
 ```php
 $locatorString = "tars.tarsregistry.QueryObj@tcp -h 127.0.0.1 -p 17890:tcp -h 127.0.0.1 -p 17890";
 
 $locatorInfo = \Tars\Utils::getLocatorInfo($locatorString);
 ```
-得到结果如下：
+The results are as follows：
 ```php
 [
 	'locatorName' => 'tars.tarsregistry.QueryObj',
@@ -41,14 +41,15 @@ $locatorInfo = \Tars\Utils::getLocatorInfo($locatorString);
 	]
 ]
 ```
-### node上报配置解析
+
+### Node report configuration analysis
 ```php
 $locatorString = "tars.tarsnode.ServerObj@tcp -h 127.0.0.1 -p 2345 -t 10000";
 
 $nodeInfo = \Tars\Utils::parseNodeInfo($locatorString);
 ```
 
-得到结果如下：
+The results are as follows:
 ```php
 [
 	'objName' => 'tars.tarsnode.ServerObj',
