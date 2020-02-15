@@ -1,4 +1,4 @@
-# Common Problems
+# Frequently Asked Questions
 
 ## Does this framework have to be bundled with swoole?
 Tars-server must be bundled with swoole. But if you only use the tars-client, you won't need to.
