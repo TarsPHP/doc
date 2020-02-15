@@ -1,0 +1,34 @@
+{
+    "title": "TarsPHP",
+    "author": "copyrenzhe",
+    "description": "TarsPHP document",
+    "language": "zh-hans",
+    "structure": {
+        "readme": "README.md"
+    },
+    "links": {
+        "sidebar": {
+            "Tars官网": "https://tars.tencent.com"
+        }
+    },
+    "plugins": [
+        "github",
+        "github-buttons",
+        "favicon"
+    ],
+    "pluginsConfig": {
+        "github": {
+            "url": "https://github.com/TarsPHP/TarsPHP"
+        },
+        "github-buttons": {
+            "buttons": [{
+                "user": "TarsPHP",
+                "repo": "TarsPHP",
+                "type": "star",
+                "size": "small",
+                "count": true
+                }
+            ]
+        }
+    }
+}
