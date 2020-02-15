@@ -1,8 +1,6 @@
-# 快速安装运行docker-tars
+# Quickly install and run docker-tars
 
-按照如下方法快速安装：
-* 参考tars-docker https://github.com/tangramor/docker-tars
-* 先运行mysql容器，再运行tars容器
+run commends following:
 
 ```
     mkdir -p /data/tars/mysql_data
@@ -11,11 +9,5 @@
     docker run -d -it --name tars --link mysql --env MOUNT_DATA=false --env DBIP=mysql --env DBPort=3306 --env DBUser=root --env DBPassword=数据库密码 -p 3000:3000 -v /data/tars/tars_data:/data tarscloud/tars:php
 ```
 
-
-
-
-
-
-
-
-
+* Refer to tars-docker: https://github.com/tangramor/docker-tars.
+* Run mysql container and then run tars container.

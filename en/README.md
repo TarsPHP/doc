@@ -1,24 +1,30 @@
 # Introduction
 
-TARS is a high-performance RPC development framework based on the name service and using the binary TARS protocol. At the same time, it supports an integrated operation management platform, and realizes the operation and maintenance semi-hosted service through scalable scheduling.
+TARS is a name based high-performance RPC framework using the TARS binary protocol. TARS achieved semi-autonomous operation by providing an operation platform which integrated service scheduling and monitoring.
 
-TARS itself has the following characteristics:
-* Multilingual: TARS supports multiple languages such as C ++ / JAVA / PHP / NodeJS;
-* Agile R & D: Through rapid service construction, automated code generation and continuous integration tools to ensure research and development efficiency;
-* High availability: TARS comes with service discovery, disaster tolerance and fault tolerance, intelligent scheduling and other features
-* Efficient operation: use TARS to achieve non-destructive business changes, three-dimensional monitoring and visual management of the service itself
+Main benefits of TARS:
 
-After years of accumulation in Tencent, TARS has become a Linux Open Source Foundation project and continues to advance in the industry.
-TARS has been started and practiced by a number of companies, including but not limited to:
-* China Literature
-* Iflytek
-* Datang Mobile
-* Huya Live
-* QiMing Information
-* Sinotrans
-* Essence Securities
-* Guangdong Water Resources Department
-* Longtu game
-* 51zhaoyou.com
-* Shenzhen Reintion Tech
-* Beaver school
+* Languages agnostic: C++ / JAVA / PHP / NodeJS / Go / Python etc.
+
+* High availability: provides service discovery, disaster tolerance, fault tolerance and intelligent scheduling.
+
+* Agile development: provides automated code generation,fast service build and continuous integration tools.
+
+* Highly efficient operation: support business non-destructive iteration,visual service management and multi-dimensional monitoring with TARS operation platform.
+
+TARS is one of Linux Open Source Foundation project now after years of iteration inside Tencent, and will continues to advance in the industry.
+
+Used By:
+* china literature
+* iFLYTEK
+* DTmobile
+* huya.com
+* qimingxinxi 
+* sinotrans
+* essence securities
+* water resources department of Guangdong province
+* longtugame
+* 51zhaoyou 
+* reintion
+* limixuexi 
+and more
