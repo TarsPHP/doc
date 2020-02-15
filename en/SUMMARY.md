@@ -43,5 +43,5 @@
 ## other
 * [Frequently Asked Questions](Question/index.md)
 * [How to Debug](Question/debug.md)
-* [Change Log](Question/changelog.md)
+* [changelog](Question/changelog.md)
 * [Other external documents](Question/outsource.md)
