@@ -14,7 +14,8 @@
     "plugins": [
         "github",
         "github-buttons",
-        "favicon"
+        "favicon",
+        "multilingual-index"
     ],
     "pluginsConfig": {
         "github": {
@@ -29,6 +30,14 @@
                 "count": true
                 }
             ]
+        },
+        "multiligual-index": {
+            "enableSuper": false,
+            "index": "README.md"
+        },
+        "favicon": {
+            "shortcut": "assets/favicon.ico",
+            "bookmark": "assets/favicon.ico"
         }
     }
 }

@@ -10,7 +10,7 @@ They have different responsibilities and different project structures. Client is
 Yes, you can. Only tars-server is bundled with swoole and tars-client is not restricted.
 
 ## Must monitoring data be stored in the swoole_table?
-Users can implement the `Tars\monitor\contract\StoreCacheInterface` to implement other storage methods, as shown in [the sample code](!https://github.com/TarsPHP/TarsPHP/tree/master/examples/tars-http-server).
+Users can implement the `Tars\monitor\contract\StoreCacheInterface` to implement other storage methods, as shown in [the sample code](https://github.com/TarsPHP/TarsPHP/tree/master/examples/tars-http-server).
 
 ## Error when generating code automatically
 Some users executed the command `php ../src/vendor/phptars/tars2php/src/rc/tars2php.php ./t ./ ./tars.proto.php` incorrectly：
@@ -47,7 +47,7 @@ If you encountered the problem like `pid is not digit`，it is because the metho
 `ps -eopid,cmd | grep "$bin"| grep "tarsnode" |  grep -v "grep"|grep -v "sh" |awk '{print $1}'`
 
 ## Does the dispatch_mode have to be 2 in the configuration file?
-The dispatch mode 2 means that the data sent by a request will only be processed by one worker. This configuration can be adjusted as needed, as detailed in [the swoole documentation](!https://wiki.swoole.com/wiki/page/277.html).
+The dispatch mode 2 means that the data sent by a request will only be processed by one worker. This configuration can be adjusted as needed, as detailed in [the swoole documentation](https://wiki.swoole.com/wiki/page/277.html).
 
 ## Missing tars extension
 Problems like the following are caused by not installing the tars extension. Please refer to php environment setup for installation.

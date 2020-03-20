@@ -15,7 +15,7 @@ TARSPHP主要实现了如下功能模块：
 * TARS-EXT扩展
 * TARS2PHP工具
 
-另有一些其他模块，可在[Framework](../Framework/introduce.md)进行查看。
+另有一些其他模块，可在[Framework](zh/Framework/introduce.md)进行查看。
 
 从宏观上来讲，使用TARSPHP你可以做这些事：
 * 启动一个HTTP服务，QPS达到万级

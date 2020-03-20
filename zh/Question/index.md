@@ -10,7 +10,7 @@ tars-server必须和swoole绑定。但是如果仅使用tars-client，就不需�
 可以的。只有tars-server是必需swoole的，tars-client没有限制。
 
 ## 主调上报一定要存储swoole_table吗
-用户可以自己实现`Tars\monitor\contract\StoreCacheInterface`接口实现其他的存储方式,可以参考[示例代码](!https://github.com/TarsPHP/TarsPHP/tree/master/examples/tars-http-server)。
+用户可以自己实现`Tars\monitor\contract\StoreCacheInterface`接口实现其他的存储方式,可以参考[示例代码](https://github.com/TarsPHP/TarsPHP/tree/master/examples/tars-http-server)。
 
 ## 自动生成代码时报错
 有用户在执行`php ../src/vendor/phptars/tars2php/src/rc/tars2php.php ./t ./ ./tars.proto.php` 时报错：

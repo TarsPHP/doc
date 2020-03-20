@@ -2,7 +2,7 @@
 
 run commends following:
 
-```
+```bash
     mkdir -p /data/tars/mysql_data
     mkdir -p /data/tars/tars_data
     docker run --name mysql -e MYSQL_ROOT_PASSWORD=数据库密码 -d -p 3306:3306 -v /data/tars/mysql_data:/var/lib/mysql mysql:5.6 --innodb_use_native_aio=0

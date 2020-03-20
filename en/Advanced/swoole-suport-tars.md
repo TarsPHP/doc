@@ -12,7 +12,7 @@
 
 * edit composer.json,add phptars & deploy script。
 
-```
+```json
 {
     "require": {
         ...

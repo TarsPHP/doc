@@ -9,7 +9,7 @@
 ## Instructions
 ### Configuration file parsing
 
-Take [QDPHP.TARSServer.config.conf]() as an example, parse the `conf` file into an array
+Take **QDPHP.TARSServer.config.conf** as an example, parse the `conf` file into an array
 
 ### Geocoding
 ```php

@@ -9,7 +9,7 @@
 
 Install dependencies of C++ language framework.
 
-```
+```bash
 yum update -y
 sudo yum install -y glibc-devel cmake ncurses-devel zlib-devel perl flex bison net-tools vim git yum-config-manager yum-utils gcc gcc-c++
 ```
@@ -18,7 +18,7 @@ sudo yum install -y glibc-devel cmake ncurses-devel zlib-devel perl flex bison n
 
 Install dependencies of TARS.If the download is slow, you can try to change the default yum source of centOs to a domestic yum image.
 
-```
+```bash
 yum install https://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm -y
 yum-config-manager --disable mysql56-community
 yum-config-manager --enable mysql57-community-dmr
@@ -29,7 +29,7 @@ yum install mysql mysql-devel mysql-server mysql-utilities -y
 
 Install dependencies of Web Management System.
 
-```
+```bash
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 source ~/.bashrc
 nvm install v8.11.3
@@ -40,7 +40,7 @@ npm install -g pm2
 
 ##### 4.1 Download TarsFramework Source
 
-```
+```bash
 git clone https://github.com/TarsCloud/TarsFramework.git
 ```
 
@@ -50,14 +50,14 @@ git clone https://github.com/TarsCloud/TarsFramework.git
 
 For example, if you install mysql in centos7.2 using yum, mysql lib files default path is `/usr/lib64/mysql` and mysql include folder default path is `/usr/include/mysql/`. You can change MYSQL_DIR_LIB in the CMakeLists.txt file to "/usr/lib64/mysql" or use `cp -r /usr/include/mysql/* /usr/local/mysql/include` to copy the file to the specified path `/usr/local/mysql/include`.
 
-```
+```bash
 set(MYSQL_DIR_INC "/usr/local/mysql/include")
 set(MYSQL_DIR_LIB "/usr/lib64/mysql")
 ```
 
 ##### 4.3 Compile and install TARS
 
-```
+```bash
 cd {$source_folder}/build
 chmod u+x build.sh
 ./build.sh prepare
@@ -66,7 +66,7 @@ chmod u+x build.sh
 
 Recompile, please use
 
-```
+```bash
 ./build.sh cleanall
 ./build.sh all
 ```
@@ -77,7 +77,7 @@ Recompile, please use
 
 Commends of modify initial password of different versions of mysql is different, you can modify initial password of mysql5.7 on centOs7.2 mysql5.7 initial following.
 
-```
+```bash
 service mysqld start
 cat /var/log/mysqld.log | grep password  // 复制mysql初始密码7zi;e3lNXV,
 mysql -uroot -p 
@@ -91,7 +91,7 @@ service mysqld restart
 
 $ {your machine ip} needs to be modified to the internal IP of your machine, which can be viewed by `ifconfig`.
 
-```
+```bash
 grant all on *.* to 'tars'@'%' identified by 'tars2015' with grant option;
 grant all on *.* to 'tars'@'localhost' identified by 'tars2015' with grant option;
 grant all on *.* to 'tars'@'${your machine ip}' identified by 'tars2015' with grant option;
@@ -102,13 +102,13 @@ flush privileges;
 
 Enter {$source_folder}/sql
 
-```
+```bash
 cd {$source_folder}/sql 
 ```
 
 Modify the deployed IP to your intranet IP
 
-```
+```bash
 sed -i "s/192.168.2.131/${your machine ip}/g" `grep 192.168.2.131 -rl ./*`
 sed -i "s/db.tars.com/${your machine ip}/g" `grep db.tars.com -rl ./*`
 sed -i "s/10.120.129.226/${your machine ip}/g" `grep 10.120.129.226 -rl ./*`
@@ -116,7 +116,7 @@ sed -i "s/10.120.129.226/${your machine ip}/g" `grep 10.120.129.226 -rl ./*`
 
 Execute exec-sql.sh
 
-```
+```bash
 chmod u+x exec-sql.sh
 ./exec-sql.sh
 ```
@@ -137,7 +137,7 @@ Core basic services must be deployed manually, while common basic services can b
 
 ##### 6.1 Preparing core basic service packages
 
-```
+```bash
 cd {$source_folder}/build
 make framework-tar
 ```
@@ -146,7 +146,7 @@ Command will generate framework.tgz in current directory.This package contains d
 
 ##### 6.2 Preparing the installation package for common basic services
 
-```
+```bash
 make tarsstat-tar
 make tarsnotify-tar
 make tarsproperty-tar
@@ -161,7 +161,7 @@ Command will generate basic service release package in the current directory whi
 
 Copy the core basic service package to the `/usr/local/app/tars` and then extract it.
 
-```
+```bash
 mkdir -p /usr/local/app/tars
 cp {$source_folder}/build/framework.tgz /usr/local/app/tars
 cd /usr/local/app/tars
@@ -170,7 +170,7 @@ tar zxvf framework.tgz
 
 Modify the configuration files of each service, pay attention to changing the IP address to your local network IP address.
 
-```$xslt
+```bash
 cd /usr/local/app/tars
 sed -i "s/192.168.2.131/${your_machine_ip}/g" `grep 192.168.2.131 -rl ./*`
 sed -i "s/db.tars.com/${your_machine_ip}/g" `grep db.tars.com -rl ./*`
@@ -180,14 +180,14 @@ sed -i "s/web.tars.com/${your_machine_ip}/g" `grep web.tars.com -rl ./*`
 
 Then execute the script in `/usr/local/app/tars/` to start the tars framework.
 
-```$xslt
+```bash
 chmod u+x tars_install.sh
 ./tars_install.sh
 ```
 
 Deploy management platform and launch it.
 
-```$xslt
+```bash
 tarspatch/util/init.sh
 ```
 
@@ -195,13 +195,13 @@ tarspatch/util/init.sh
 
 Download web source.
 
-```$xslt
+```bash
 git clone https://github.com/TarsCloud/TarsWeb
 ```
 
 Modify the configuration file of source code and change the ip address to your internal network IP address.
 
-```$xslt
+```bash
 cd {$web_source_folder}
 sed -i 's/db.tars.com/${your_machine_ip}/g' config/webConf.js
 sed -i 's/registry.tars.com/${your_machine_ip}/g' config/tars.conf
@@ -209,7 +209,7 @@ sed -i 's/registry.tars.com/${your_machine_ip}/g' config/tars.conf
 
 Install and start web management page.
 
-```$xslt
+```bash
 cd {$web_source_folder}
 npm install --registry=https://registry.npm.taobao.org
 npm run prd
@@ -217,7 +217,7 @@ npm run prd
 
 Create log directory.
 
-```$xslt
+```bash
 mkdir -p /data/log/tars
 ```
 
@@ -255,5 +255,5 @@ Deploy tarsnotify, tarsproperty, tarslog, tarsquerystat, tarsqueryproperty one b
     
 # Quick installation
 
-* [Use docker] (./ docker.md)
+* [Use docker](en/Environment/docker.md)
 

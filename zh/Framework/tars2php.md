@@ -19,7 +19,7 @@ tars2php主要功能是通过tars协议文件，自动生成client端和server�
         'dstPath' => './server/', //生成php文件的位置    
         'namespacePrefix' => 'Server\servant', //生成php文件的命名空间前缀 );    
     ```
-3. 执行php ./tars2php.php ./tars.proto.php    
+3. 执行 `php ./tars2php.php ./tars.proto.php`   
 4. 工具会根据servant name自动生成三级目录结构，demo中会在./server目录下生成PHPTest/PHPServer/obj/目录，obj目录下的classers是struct对应的php对象，tars目录是tars协议文件本身。    
  如example.tars中的struct:    
     ```  

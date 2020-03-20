@@ -32,7 +32,7 @@ tests目录提供了一个tars服务的测试用例。服务名为 **App.Server.
     tars主控本身也是一个tars服务，服务名为 **tars.tarsregistry.QueryObj** ，传输协议为tcp，服务地址为 172.16.0.161，端口为 17890 。实际开发中请 **根据服务实际情况填写**  
     
     上述主控服务确定后，可以根据需要指定上报的模块名及编码格式。默认的上报模块名为 **tarsproxy** ，为了便于跟踪业务，建议重新指定上报模块名
-    ```
+    ```php
     $config->setModuleName("App.Server");
     $config->setCharsetName("UTF-8");
     ```

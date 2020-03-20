@@ -104,7 +104,7 @@ Yii2 in Tars
 
 # Continuous integration
 Jenkins Pipeline Configuration example (modified according to actual situation)
-```
+```json
 pipeline {
     agent {
         node {

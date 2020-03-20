@@ -116,7 +116,7 @@ Laravel in Tars with ci
 Jenkins Pipeline Configuration example (modified according to actual situation)
 
 Laravel:
-```
+```bash
 pipeline {
     agent {
         node {

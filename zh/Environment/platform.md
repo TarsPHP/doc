@@ -1,6 +1,6 @@
 # 安装说明
 
-* 本文说明了如何在单机服务器部署TARS环境，如需安装TARS-PHP请参考[搭建php环境](./php.md)，如需进行服务开发请参考[快速起步](../QuickStart)。
+* 本文说明了如何在单机服务器部署TARS环境，如需安装TARS-PHP请参考[搭建php环境](zh/Environment/php.md)，如需进行服务开发请参考[快速起步](zh/QuickStart/introduce.md)。
 * 本文使用操作系统版本: centOs7.2
 * 本文使用的数据库版本: mysql5.7
 * 本文的的操作命令运行需要root权限，需要确保服务器联网。
@@ -9,7 +9,7 @@
 
 C++语言框架依赖。
 
-```
+```bash
 yum update -y
 sudo yum install -y glibc-devel cmake ncurses-devel zlib-devel perl flex bison net-tools vim git yum-config-manager yum-utils gcc gcc-c++
 ```
@@ -18,7 +18,7 @@ sudo yum install -y glibc-devel cmake ncurses-devel zlib-devel perl flex bison n
 
 框架运行依赖，如果下载较慢，可以尝试将centOs默认yum源修改为国内yum的镜像。
 
-```
+```bash
 yum install https://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm -y
 yum-config-manager --disable mysql56-community
 yum-config-manager --enable mysql57-community-dmr
@@ -29,7 +29,7 @@ yum install mysql mysql-devel mysql-server mysql-utilities -y
 
 Web管理系统依赖。
 
-```
+```bash
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 source ~/.bashrc
 nvm install v8.11.3
@@ -38,26 +38,26 @@ npm install -g pm2
 
 ### 4.安装TARS
 
-#####4.1 下载TarsFramework源码
+##### 4.1 下载TarsFramework源码
 
-```
+```bash
 git clone https://github.com/TarsCloud/TarsFramework.git
 ```
 
-#####4.2 检查MYSQL路径
+##### 4.2 检查MYSQL路径
 
 **查看源码目录下的CMakeLists.txt文件，确保MYSQL的相关路径配置与本机一致。**
 
 比如，在centos7.2使用yum安装mysql，mysql的lib文件默认放在`/usr/lib64/mysql`，include文件夹默认在`/usr/include/mysql/`，可将CMakeLists.txt文件中的MYSQL_DIR_LIB改为"/usr/lib64/mysql"；也可使用`cp -r /usr/include/mysql/* /usr/local/mysql/include`将文件copy到指定路径`/usr/local/mysql/include`，如下：
 
-```
+```bash
 set(MYSQL_DIR_INC "/usr/local/mysql/include")
 set(MYSQL_DIR_LIB "/usr/lib64/mysql")
 ```
 
-#####4.3 编译安装TARS
+##### 4.3 编译安装TARS
 
-```
+```bash
 cd {$source_folder}/build
 chmod u+x build.sh
 ./build.sh prepare
@@ -66,7 +66,7 @@ chmod u+x build.sh
 
 如需重新编译请使用
 
-```
+```bash
 ./build.sh cleanall
 ./build.sh all
 ```
@@ -77,7 +77,7 @@ chmod u+x build.sh
 
 不同版本的mysql初始密码的修改方式略有不同，可根据实际情况自行修改，以下为centOs7.2的mysql5.7初始密码修改方式。
 
-```
+```bash
 service mysqld start
 cat /var/log/mysqld.log | grep password  // 复制mysql初始密码7zi;e3lNXV,
 mysql -uroot -p 
@@ -87,28 +87,28 @@ mysql>\q
 service mysqld restart
 ```
 
-#####5.2 添加用户
+##### 5.2 添加用户
 
 ${your machine ip}需要修改成自身机器内网ip，可以通过`ifconfig`查看。
 
-```
+```bash
 grant all on *.* to 'tars'@'%' identified by 'tars2015' with grant option;
 grant all on *.* to 'tars'@'localhost' identified by 'tars2015' with grant option;
 grant all on *.* to 'tars'@'${your machine ip}' identified by 'tars2015' with grant option;
 flush privileges;
 ```
 
-#####5.3 创建数据库
+##### 5.3 创建数据库
 
 进入源码的sql目录
 
-```
+```bash
 cd {$source_folder}/sql 
 ```
 
 修改部署的ip为本机内网ip
 
-```
+```bash
 sed -i "s/192.168.2.131/${your machine ip}/g" `grep 192.168.2.131 -rl ./*`
 sed -i "s/db.tars.com/${your machine ip}/g" `grep db.tars.com -rl ./*`
 sed -i "s/10.120.129.226/${your machine ip}/g" `grep 10.120.129.226 -rl ./*`
@@ -116,7 +116,7 @@ sed -i "s/10.120.129.226/${your machine ip}/g" `grep 10.120.129.226 -rl ./*`
 
 执行exec-sql.sh脚本
 
-```
+```bash
 chmod u+x exec-sql.sh
 ./exec-sql.sh
 ```
@@ -126,7 +126,7 @@ chmod u+x exec-sql.sh
 * tars_stat：服务监控数据存储的数据库；
 * tars_property：服务属性监控数据存储的数据库；
 
-###6.安装框架基础服务
+### 6.安装框架基础服务
 
 框架服务的安装分两种：
 
@@ -135,18 +135,18 @@ chmod u+x exec-sql.sh
 
 核心基础服务必须手工部署，普通基础服务可以通过管理平台发布。
 
-#####6.1 准备核心基础服务包
+##### 6.1 准备核心基础服务包
 
-```
+```bash
 cd {$source_folder}/build
 make framework-tar
 ```
 
 命令执行后，会在当前目录生成framework.tgz，这个包包含了tarsAdminRegistry, tarsregistry, tarsnode, tarsconfig, tarspatch 部署相关的文件。
 
-#####6.2 准备普通基础服务安装包
+##### 6.2 准备普通基础服务安装包
 
-```
+```bash
 make tarsstat-tar
 make tarsnotify-tar
 make tarsproperty-tar
@@ -157,11 +157,11 @@ make tarsqueryproperty-tar
 
 命令执行后，会在当前目录生成基础服务发布包，可以在管理平台部署完成后，通过管理平台进行部署发布。
 
-#####6.3 安装核心基础服务
+##### 6.3 安装核心基础服务
 
 将核心基础服务包copy到/usr/local/app/tars目录下，并解压。
 
-```
+```bash
 mkdir -p /usr/local/app/tars
 cp {$source_folder}/build/framework.tgz /usr/local/app/tars
 cd /usr/local/app/tars
@@ -170,7 +170,7 @@ tar zxvf framework.tgz
 
 修改各个服务对应conf目录下的配置文件，注意将配置文件中的ip地址修改为本机内网ip地址。
 
-```$xslt
+```bash
 cd /usr/local/app/tars
 sed -i "s/192.168.2.131/${your_machine_ip}/g" `grep 192.168.2.131 -rl ./*`
 sed -i "s/db.tars.com/${your_machine_ip}/g" `grep db.tars.com -rl ./*`
@@ -180,28 +180,28 @@ sed -i "s/web.tars.com/${your_machine_ip}/g" `grep web.tars.com -rl ./*`
 
 然后在`/usr/local/app/tars/`目录下，执行脚本，启动tars框架服务。
 
-```$xslt
+```bash
 chmod u+x tars_install.sh
 ./tars_install.sh
 ```
 
 部署管理平台并启动web管理平台
 
-```$xslt
+```bash
 tarspatch/util/init.sh
 ```
 
-#####6.4.安装web管理平台
+##### 6.4.安装web管理平台
 
 下载web源码
 
-```$xslt
+```bash
 git clone https://github.com/TarsCloud/TarsWeb
 ```
 
 修改源码中的配置文件，将配置文件中的ip地址改成本机内网ip地址。
 
-```$xslt
+```bash
 cd {$web_source_folder}
 sed -i 's/db.tars.com/${your_machine_ip}/g' config/webConf.js
 sed -i 's/registry.tars.com/${your_machine_ip}/g' config/tars.conf
@@ -209,7 +209,7 @@ sed -i 's/registry.tars.com/${your_machine_ip}/g' config/tars.conf
 
 安装web管理页面依赖，启动web。
 
-```$xslt
+```bash
 cd {$web_source_folder}
 npm install --registry=https://registry.npm.taobao.org
 npm run prd
@@ -217,7 +217,7 @@ npm run prd
 
 创建日志目录。
 
-```$xslt
+```bash
 mkdir -p /data/log/tars
 ```
 
@@ -225,7 +225,7 @@ mkdir -p /data/log/tars
 
 ![alt text](https://github.com/TarsCloud/Tars/raw/master/docs/images/tars_web_system_index.png)
 
-#####6.5 安装普通基础服务
+##### 6.5 安装普通基础服务
 
 **平台部署的端口号仅供参考，保证端口无冲突即可**
 
@@ -256,6 +256,6 @@ mkdir -p /data/log/tars
 
 # 快速安装
 
-* [使用docker](./docker.md)
+* [使用docker](zh/Environment/docker.md)
 
 

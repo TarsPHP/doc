@@ -9,7 +9,7 @@
 ## 使用说明
 ### 配置文件解析
 
-以[QDPHP.TARSServer.config.conf]() 为例，将`conf` 文件解析成 数组形式
+以 **QDPHP.TARSServer.config.conf** 为例，将`conf` 文件解析成 数组形式
 
 ### 地址解析
 ```php
