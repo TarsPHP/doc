@@ -100,7 +100,7 @@ Yii2 in Tars
 
 9. Package the project in the tars PHP development environment(run ```./yii tars/deploy``` in src)
 
-10. Publish the project in the tars management background, please refer to [TARS-PHP-TCP Server and client development](https://tangramor.gitlab.io/tars-docker-guide/2.TARS-PHP-TCP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/))，测试```curl 'http://{ip}:{port}/{api_route}'```
+10. Publish the project in the tars management background, please refer to [TARS-PHP-TCP Server and client development](https://tangramor.gitlab.io/tars-docker-guide/2.TARS-PHP-TCP%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%80%E5%8F%91/))，test```curl 'http://{ip}:{port}/{api_route}'```
 
 # Continuous integration
 Jenkins Pipeline Configuration example (modified according to actual situation)
