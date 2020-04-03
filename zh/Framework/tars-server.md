@@ -5,6 +5,7 @@ tars-server是用php语言实现tars服务的基础框架包。主要包含服�
 
 ## 如何使用  
 tars-server使用composer进行包管理,开发者只需要根据相应的版本,进行composer install即可。  
+该服务依赖于 `exec` 函数，如果禁用了该函数，需要在 `php.ini` 中放开。
   
 具体的使用方式,请参考对应[examples](https://github.com/TarsPHP/TarsPHP/tree/master/examples)下面的http-server、timer-server和tcp-server。  
   

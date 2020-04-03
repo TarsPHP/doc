@@ -2,6 +2,7 @@
 
 ## Introduction
 **Tars-server** is a basic framework for implementing tars services in PHP. It mainly includes service start and stop, route analysis, protocol processing, and event reporting.
+**Tars-server** depends on the `exec` function. If this function is disabled, it needs to be enabled in` php.ini`.
 
 ## How to use  
 **Tars-server** uses *composer* for package management. Developers only need to perform `composer install` according to the corresponding version.
