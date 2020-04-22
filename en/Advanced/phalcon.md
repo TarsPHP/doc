@@ -12,9 +12,12 @@ Phalcon in Tars
 * TARSPHP (https://github.com/TarsPHP)
 * TARSPHP DOCKER (https://github.com/tangramor/docker-tars)
 
+# Thanks
+* [iamloso](https://github.com/iamloso)
+
 # Project Directory Structure
 - component: Common base class of Controller
-- conf: The configuration required by the business is only given here as a demo. If the configuration is sent from the platform, it will be written to this folder by default
+- conf: The configuration required by the business
 - controller: The C layer in the MVC model
 - database: Database connection configuration
 - libs: Common libs、server/model extensions、utils 
@@ -38,7 +41,7 @@ Phalcon in Tars
    Install composer dependencies
 
    ```shell
-   cd user-httpserver/src && composer install -vvv
+   cd src && composer install -vvv
    ```
 
 2. Basic service config

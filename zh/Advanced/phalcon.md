@@ -7,20 +7,24 @@ Phalcon集成微服务治理框架Tars
 * 受限于框架本身的设计，不支持协程
 
 # 相关项目
+* tars-php-phalcon (https://github.com/luoxiaojun1992/tars-php-phalcon)
 * tars-php-phalcon (https://github.com/iamloso/tars-php-phalcon)
 * Phalcon (https://github.com/phalcon/cphalcon)
 * TARSPHP (https://github.com/TarsPHP)
 * TARSPHP DOCKER (https://github.com/tangramor/docker-tars)
 
+# 感谢
+* [iamloso](https://github.com/iamloso)
+
 # 项目目录结构
 - component: 存储Controller的基础类,方便所有的Controller公用
-- conf: 业务需要的配置, 这里只是给出一个demo,如果从平台下发配置,默认也会写入到这个文件夹中
+- conf: 业务需要的配置
 - controller: MVC模型中的C层
 - database: 数据库连接配置
 - libs: 存储公用类库, server/model扩展类库, 插件工具类 
 - models: 存储库表对应的model文件
 - servant: 使用tars2php生成的client端的代码, 这个目录名称完全可以自定义,只需要在使用的时候加以区分就可以了
-- services: 存储业务实现类
+- services: 业务服务实现类
 - tasks:  命令行方式执行业务services, 可以方便业务代码调试, 也可以做crontable定时任务
 - composer.json: 说明项目的依赖情况
 - index.php: 整个服务的入口文件,这个文件名称可以自定义,但是必须要更改平台上的私有模板,增加entrance这个字段在server下面
@@ -38,7 +42,7 @@ Phalcon集成微服务治理框架Tars
    安装composer依赖
 
    ```shell
-   cd user-httpserver/src && composer install -vvv
+   cd src && composer install -vvv
    ```
 
 2. 配置服务基本信息
