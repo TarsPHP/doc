@@ -8,7 +8,6 @@ Phalcon集成微服务治理框架Tars
 
 # 相关项目
 * tars-php-phalcon (https://github.com/luoxiaojun1992/tars-php-phalcon)
-* tars-php-phalcon (https://github.com/iamloso/tars-php-phalcon)
 * Phalcon (https://github.com/phalcon/cphalcon)
 * TARSPHP (https://github.com/TarsPHP)
 * TARSPHP DOCKER (https://github.com/tangramor/docker-tars)

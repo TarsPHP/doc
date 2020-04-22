@@ -7,7 +7,7 @@ Phalcon in Tars
 * Limited by the design of the framework itself, it does not support cooperation
 
 # Related
-* tars-php-phalcon (https://github.com/iamloso/tars-php-phalcon)
+* tars-php-phalcon (https://github.com/luoxiaojun1992/tars-php-phalcon)
 * Phalcon (https://github.com/phalcon/cphalcon)
 * TARSPHP (https://github.com/TarsPHP)
 * TARSPHP DOCKER (https://github.com/tangramor/docker-tars)
