@@ -1,7 +1,7 @@
 # Introduction
 Phalcon in Tars
 * Support Packing code
-* Support partial Phalcon develop(router and session are not supported)
+* Support Phalcon develop
 * Support TarsConfig
 * Support http & tars Protocol
 * Limited by the design of the framework itself, it does not support cooperation

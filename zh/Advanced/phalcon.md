@@ -1,7 +1,7 @@
 # 简介
 Phalcon集成微服务治理框架Tars
 * 支持服务打包
-* 支持Phalcon部分原生开发(路由、session暂不支持)
+* 支持Phalcon原生开发
 * 支持TarsConfig
 * 支持http和tars协议
 * 受限于框架本身的设计，不支持协程
